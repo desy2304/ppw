@@ -5,6 +5,11 @@ title: My sample book
 author: The Jupyter Book Community
 logo: profil.jpeg
 
+sphinx:
+  config:
+    html_css_files:
+      - custom.css
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
