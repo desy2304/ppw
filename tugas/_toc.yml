@@ -6,4 +6,3 @@ root: intro
 chapters:
 - file: Pengantar Web Mining
 - file: Scraping crawling
-title: Scraping crawling
