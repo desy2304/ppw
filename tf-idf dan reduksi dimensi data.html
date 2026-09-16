@@ -453,15 +453,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'punkt'</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'punkt_tab'</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">'words'</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named 'nltk'
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package punkt_tab to
+[nltk_data]     /home/codespace/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+[nltk_data] Downloading package words to /home/codespace/nltk_data...
+[nltk_data]   Package words is already up-to-date!
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -507,31 +508,31 @@
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Persib Bandung mengawali kiprahnya di AFC Cham...</td>
+      <td>Hamza Abdelkarim kagumi Erling Haaland. Strike...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Alwi Farhan, Moh Zaki Ubaidillah dan Muhamad Y...</td>
+      <td>Kontrak Luke Shaw di Manchester United akan ha...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Tottenham Hotspur akhirnya kembali mencetak go...</td>
+      <td>Erling Haaland bermain bagus di Manchester Cit...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>Yan Diomande tampil menawan saat Real Madrid m...</td>
+      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>Pelatih Timnas Jerman, Juergen Klopp kabarnya ...</td>
+      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
       <td>sport</td>
     </tr>
   </tbody>
@@ -587,28 +588,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Persib Bandung mengawali kiprahnya di AFC Cham...</td>
-      <td>persib bandung mengawali kiprahnya di afc cham...</td>
+      <td>Hamza Abdelkarim kagumi Erling Haaland. Strike...</td>
+      <td>hamza abdelkarim kagumi erling haaland striker...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Alwi Farhan, Moh Zaki Ubaidillah dan Muhamad Y...</td>
-      <td>alwi farhan moh zaki ubaidillah dan muhamad yu...</td>
+      <td>Kontrak Luke Shaw di Manchester United akan ha...</td>
+      <td>kontrak luke shaw di manchester united akan ha...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Tottenham Hotspur akhirnya kembali mencetak go...</td>
-      <td>tottenham hotspur akhirnya kembali mencetak go...</td>
+      <td>Erling Haaland bermain bagus di Manchester Cit...</td>
+      <td>erling haaland bermain bagus di manchester cit...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Yan Diomande tampil menawan saat Real Madrid m...</td>
-      <td>yan diomande tampil menawan saat real madrid m...</td>
+      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
+      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Pelatih Timnas Jerman, Juergen Klopp kabarnya ...</td>
-      <td>pelatih timnas jerman juergen klopp kabarnya m...</td>
+      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
+      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
     </tr>
   </tbody>
 </table>
@@ -649,28 +650,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>persib bandung mengawali kiprahnya di afc cham...</td>
-      <td>[persib, bandung, mengawali, kiprahnya, di, af...</td>
+      <td>hamza abdelkarim kagumi erling haaland striker...</td>
+      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>alwi farhan moh zaki ubaidillah dan muhamad yu...</td>
-      <td>[alwi, farhan, moh, zaki, ubaidillah, dan, muh...</td>
+      <td>kontrak luke shaw di manchester united akan ha...</td>
+      <td>[kontrak, luke, shaw, di, manchester, united, ...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>tottenham hotspur akhirnya kembali mencetak go...</td>
-      <td>[tottenham, hotspur, akhirnya, kembali, mencet...</td>
+      <td>erling haaland bermain bagus di manchester cit...</td>
+      <td>[erling, haaland, bermain, bagus, di, manchest...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>yan diomande tampil menawan saat real madrid m...</td>
-      <td>[yan, diomande, tampil, menawan, saat, real, m...</td>
+      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
+      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>pelatih timnas jerman juergen klopp kabarnya m...</td>
-      <td>[pelatih, timnas, jerman, juergen, klopp, kaba...</td>
+      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
     </tr>
   </tbody>
 </table>
@@ -680,9 +681,14 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.StopWordRemover.StopWordRemoverFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StopWordRemoverFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.Stemmer.StemmerFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StemmerFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">words</span> <span class="k">as</span> <span class="n">english_words</span>
 
 <span class="n">stopword_factory</span> <span class="o">=</span> <span class="n">StopWordRemoverFactory</span><span class="p">()</span>
 <span class="n">indo_stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopword_factory</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">())</span>
+<span class="n">factory</span> <span class="o">=</span> <span class="n">StemmerFactory</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">create_stemmer</span><span class="p">()</span>
+<span class="n">english_vocab</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">english_words</span><span class="o">.</span><span class="n">words</span><span class="p">())</span>
 
 <span class="n">tambahan_stopwords</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"kali"</span><span class="p">,</span> <span class="s2">"mana"</span><span class="p">,</span> <span class="s2">"hal"</span><span class="p">,</span> <span class="s2">"tim"</span><span class="p">,</span> <span class="s2">"era"</span><span class="p">,</span> <span class="s2">"pun"</span><span class="p">,</span> <span class="s2">"apa"</span><span class="p">,</span> <span class="s2">"dan"</span><span class="p">,</span> <span class="s2">"dari"</span><span class="p">,</span> <span class="s2">"akan"</span><span class="p">,</span> <span class="s2">"yang"</span><span class="p">,</span> <span class="s2">"saya"</span><span class="p">}</span>
 <span class="n">indo_stopwords</span> <span class="o">=</span> <span class="n">indo_stopwords</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">tambahan_stopwords</span><span class="p">)</span>
@@ -705,7 +711,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['league', 'world', 'stadium', 'tuan', 'julio', 'marc', 'bola', 'kang', 'tuan', 'dong', 'ragnar', 'tuan', 'super', 'league', 'momentum', 'masa', 'injury', 'time', 'league', 'kang', 'arab', 'shin', 'moon', 'park', 'woon', 'gabriel', 'julio', 'ikhwan', 'patricio', 'adam', 'marc', 'ragnar', 'balsa']
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['hamza', 'striker', 'barcelona', 'hamza', 'striker', 'barcelona', 'hamza', 'main', 'thierry', 'henry', 'hamza', 'striker', 'tribuna', 'cara', 'hamza', 'flick', 'barcelona', 'sedang']
 </pre></div>
 </div>
 </div>
@@ -746,28 +752,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>[persib, bandung, mengawali, kiprahnya, di, af...</td>
-      <td>[persib, bandung, mengawali, kiprahnya, afc, c...</td>
+      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
+      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>[alwi, farhan, moh, zaki, ubaidillah, dan, muh...</td>
-      <td>[alwi, farhan, moh, zaki, ubaidillah, muhamad,...</td>
+      <td>[kontrak, luke, shaw, di, manchester, united, ...</td>
+      <td>[kontrak, luke, shaw, manchester, united, habi...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>[tottenham, hotspur, akhirnya, kembali, mencet...</td>
-      <td>[tottenham, hotspur, akhirnya, mencetak, gol, ...</td>
+      <td>[erling, haaland, bermain, bagus, di, manchest...</td>
+      <td>[erling, haaland, bermain, bagus, manchester, ...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>[yan, diomande, tampil, menawan, saat, real, m...</td>
-      <td>[yan, diomande, tampil, menawan, real, madrid,...</td>
+      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
+      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>[pelatih, timnas, jerman, juergen, klopp, kaba...</td>
-      <td>[pelatih, timnas, jerman, juergen, klopp, kaba...</td>
+      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
+      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
     </tr>
   </tbody>
 </table>
@@ -794,66 +800,103 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 200/200
-Selesai stemming
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 1/200
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 2/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 3/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 4/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 5/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 6/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 7/200
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 8/200
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">hasil_stem</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'tokens_no_stopword'</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">hasil_stem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\r</span><span class="s2">Stemming progress: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df</span><span class="p">[</span><span class="s1">'tokens_final'</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasil_stem</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+<span class="nn">Cell In[7], line 2,</span> in <span class="ni">stem_tokens</span><span class="nt">(tokens)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">return</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tokens_no_stopword</th>
-      <th>tokens_final</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>[persib, bandung, mengawali, kiprahnya, afc, c...</td>
-      <td>[persib, bandung, awal, kiprah, afc, champions...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>[alwi, farhan, moh, zaki, ubaidillah, muhamad,...</td>
-      <td>[alwi, farhan, moh, zaki, ubaidillah, muhamad,...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>[tottenham, hotspur, akhirnya, mencetak, gol, ...</td>
-      <td>[tottenham, hotspur, akhir, cetak, gol, lawan,...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>[yan, diomande, tampil, menawan, real, madrid,...</td>
-      <td>[yan, diomande, tampil, tawan, real, madrid, m...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>[pelatih, timnas, jerman, juergen, klopp, kaba...</td>
-      <td>[latih, timnas, jerman, juergen, klopp, kabar,...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/CachedStemmer.py:20,</span> in <span class="ni">CachedStemmer.stem</span><span class="nt">(self, text)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">20</span>     <span class="n">stem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delegatedStemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">stem</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:27,</span> in <span class="ni">Stemmer.stem</span><span class="nt">(self, text)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">stems</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stem_word</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stems</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:36,</span> in <span class="ni">Stemmer.stem_word</span><span class="nt">(self, word)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_plural_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">36</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_singular_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:84,</span> in <span class="ni">Stemmer.stem_singular_word</span><span class="nt">(self, word)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span><span class="w"> </span><span class="sd">"""Stem a singular word to its common stem form."""</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">visitor_provider</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">84</span> <span class="n">context</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span> <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">result</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:37,</span> in <span class="ni">Context.execute</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="w"> </span><span class="sd">"""Execute stemming process; the result can be retrieved with result"""</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="c1">#step 1 - 5</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_stemming_process</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1">#step 6</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:75,</span> in <span class="ni">Context.start_stemming_process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="bp">self</span><span class="o">.</span><span class="n">removals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="c1">#step 2, 3</span>
+<span class="ne">---&gt; </span><span class="mi">75</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_suffixes</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">return</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:94,</span> in <span class="ni">Context.remove_suffixes</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="k">def</span><span class="w"> </span><span class="nf">remove_suffixes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept_visitors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">suffix_visitors</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:104,</span> in <span class="ni">Context.accept_visitors</span><span class="nt">(self, visitors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
+<span class="ne">--&gt; </span><span class="mi">104</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_is_stopped</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="pembentukan-vocabulary">
 <h2>Pembentukan Vocabulary<a class="headerlink" href="#pembentukan-vocabulary" title="Link to this heading">#</a></h2>
-<p>Setelah preprocessing selesai, seluruh kata dari tokens_final dikumpulkan dan kata yang sama hanya dihitung satu kali. Hasilnya terdapat 5.211 kata unik yang digunakan sebagai vocabulary.</p>
+<p>Setelah preprocessing selesai, seluruh kata dari tokens_final dikumpulkan dan kata yang sama hanya dihitung satu kali. Hasilnya terdapat 5.335 kata unik yang digunakan sebagai vocabulary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">semua_kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">kata</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">'tokens_final'</span><span class="p">]</span> <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
@@ -869,8 +912,8 @@ Selesai stemming
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kata unik setelah filter: 5211
-['a', 'aaa', 'ab', 'abad', 'abadi', 'abai', 'abal', 'abang', 'abdoul', 'abdulelah', 'abdullah', 'abel', 'abet', 'abha', 'abiel', 'absen', 'absorber', 'ac', 'academy', 'acara', 'accelerating', 'acceptance', 'access', 'accessories', 'accident', 'accreditation', 'acd', 'aceh', 'achadie', 'achilles']
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kata unik setelah filter: 5335
+['a', 'aaa', 'ab', 'abad', 'abadi', 'abai', 'abal', 'abang', 'abdelkarim', 'abdoul', 'abdulelah', 'abdullah', 'abel', 'abet', 'abha', 'abiel', 'absen', 'absorber', 'ac', 'academy', 'acak', 'acara', 'accelerating', 'acceptance', 'access', 'accessories', 'accident', 'accreditation', 'acd', 'aceh']
 </pre></div>
 </div>
 </div>
@@ -920,7 +963,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5213)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5337)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -950,17 +993,17 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <th>abai</th>
       <th>abal</th>
       <th>abang</th>
-      <th>abdoul</th>
+      <th>abdelkarim</th>
       <th>...</th>
-      <th>zerbi</th>
       <th>zhegrova</th>
       <th>zhejiang</th>
       <th>zhestkova</th>
       <th>zielinski</th>
       <th>zikrak</th>
-      <th>zim</th>
       <th>zona</th>
       <th>zubimendi</th>
+      <th>zulhas</th>
+      <th>zulkifli</th>
       <th>label</th>
     </tr>
   </thead>
@@ -976,7 +1019,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
+      <td>1</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1026,7 +1069,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1087,7 +1130,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
     </tr>
   </tbody>
 </table>
-<p>5 rows × 5213 columns</p>
+<p>5 rows × 5337 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1111,7 +1154,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5213)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5337)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1141,17 +1184,17 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <th>abai</th>
       <th>abal</th>
       <th>abang</th>
-      <th>abdoul</th>
+      <th>abdelkarim</th>
       <th>...</th>
-      <th>zerbi</th>
       <th>zhegrova</th>
       <th>zhejiang</th>
       <th>zhestkova</th>
       <th>zielinski</th>
       <th>zikrak</th>
-      <th>zim</th>
       <th>zona</th>
       <th>zubimendi</th>
+      <th>zulhas</th>
+      <th>zulkifli</th>
       <th>label</th>
     </tr>
   </thead>
@@ -1167,9 +1210,9 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.329679</td>
       <td>...</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1191,9 +1234,9 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
       <td>0.000000</td>
+      <td>...</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1215,9 +1258,9 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
       <td>...</td>
-      <td>0.133095</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1239,9 +1282,9 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
       <td>0.000000</td>
+      <td>...</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1263,9 +1306,9 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
       <td>0.000000</td>
+      <td>...</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1278,10 +1321,10 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
     </tr>
   </tbody>
 </table>
-<p>5 rows × 5213 columns</p>
+<p>5 rows × 5337 columns</p>
 </div></div></div>
 </div>
-<p>Teks yang telah melalui preprocessing kemudian digabungkan kembali menjadi teks menggunakan tokens_final. Selanjutnya, TF-IDF digunakan untuk mengubah setiap berita menjadi representasi numerik berdasarkan bobot kepentingan setiap kata dalam dokumen. Hasil representasi menghasilkan 200 berita dengan 5.211 fitur kata.</p>
+<p>Teks yang telah melalui preprocessing kemudian digabungkan kembali menjadi teks menggunakan tokens_final. Selanjutnya, TF-IDF digunakan untuk mengubah setiap berita menjadi representasi numerik berdasarkan bobot kepentingan setiap kata dalam dokumen. Hasil representasi menghasilkan 200 berita dengan 5.335 fitur kata.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contoh_doc</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1290,16 +1333,16 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>persib     0.397914
-seoul      0.285760
-bandung    0.202968
-bikin      0.198393
-fc         0.176851
-cesar      0.170772
-jeong      0.170772
-ancam      0.142880
-min        0.113848
-kang       0.113848
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>haaland       0.448107
+hamza         0.412099
+abdelkarim    0.329679
+aku           0.223688
+striker       0.216710
+erling        0.192046
+aspek         0.176326
+nil           0.164840
+sungai        0.164840
+mau           0.161483
 Name: 0, dtype: float64
 </pre></div>
 </div>
@@ -1323,7 +1366,7 @@ Name: 0, dtype: float64
 </section>
 <section id="reduksi-dimensi-dengan-pca">
 <h2>Reduksi Dimensi dengan PCA<a class="headerlink" href="#reduksi-dimensi-dengan-pca" title="Link to this heading">#</a></h2>
-<p>Data hasil TF-IDF kemudian digunakan sebagai input untuk PCA (Principal Component Analysis). Sebelum PCA, data memiliki ukuran 200 × 5.211, yaitu 200 berita dengan 5.211 fitur.</p>
+<p>Data hasil TF-IDF kemudian digunakan sebagai input untuk PCA (Principal Component Analysis). Sebelum PCA, data memiliki ukuran 200 × 5.335, yaitu 200 berita dengan 5.335 fitur.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
@@ -1334,7 +1377,7 @@ Name: 0, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape sebelum PCA: (200, 5211)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape sebelum PCA: (200, 5335)
 </pre></div>
 </div>
 </div>
@@ -1357,8 +1400,8 @@ Name: 0, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah komponen untuk menjelaskan 90% variansi: 142
-Total dimensi awal: 5211
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah komponen untuk menjelaskan 90% variansi: 144
+Total dimensi awal: 5335
 </pre></div>
 </div>
 </div>
@@ -1379,7 +1422,7 @@ Total dimensi awal: 5211
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape setelah PCA: (200, 142)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape setelah PCA: (200, 144)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1411,8 +1454,6 @@ Total dimensi awal: 5211
       <th>PC8</th>
       <th>PC9</th>
       <th>...</th>
-      <th>PC134</th>
-      <th>PC135</th>
       <th>PC136</th>
       <th>PC137</th>
       <th>PC138</th>
@@ -1420,6 +1461,8 @@ Total dimensi awal: 5211
       <th>PC140</th>
       <th>PC141</th>
       <th>PC142</th>
+      <th>PC143</th>
+      <th>PC144</th>
       <th>label</th>
     </tr>
   </thead>
@@ -1427,129 +1470,129 @@ Total dimensi awal: 5211
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-0.178188</td>
-      <td>-0.028485</td>
-      <td>0.061914</td>
-      <td>0.180519</td>
-      <td>0.150416</td>
-      <td>0.106157</td>
-      <td>0.388521</td>
-      <td>0.365211</td>
-      <td>-0.163586</td>
+      <td>-0.124400</td>
+      <td>-0.011088</td>
+      <td>0.033212</td>
+      <td>-0.116010</td>
+      <td>-0.113935</td>
+      <td>-0.049799</td>
+      <td>0.005385</td>
+      <td>-0.090367</td>
+      <td>-0.058656</td>
       <td>...</td>
-      <td>-0.014949</td>
-      <td>0.165988</td>
-      <td>0.147785</td>
-      <td>0.145939</td>
-      <td>0.113244</td>
-      <td>-0.060222</td>
-      <td>0.041977</td>
-      <td>0.179442</td>
-      <td>-0.164346</td>
+      <td>-0.057029</td>
+      <td>-0.003386</td>
+      <td>-0.015630</td>
+      <td>0.028462</td>
+      <td>0.042292</td>
+      <td>0.086063</td>
+      <td>0.095085</td>
+      <td>-0.003322</td>
+      <td>0.003741</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>-0.084644</td>
-      <td>-0.004242</td>
-      <td>-0.119602</td>
-      <td>0.215207</td>
-      <td>-0.112751</td>
-      <td>0.032872</td>
-      <td>-0.327947</td>
-      <td>-0.044506</td>
-      <td>-0.032662</td>
+      <td>-0.137792</td>
+      <td>-0.019039</td>
+      <td>0.040574</td>
+      <td>-0.126531</td>
+      <td>-0.225088</td>
+      <td>-0.126963</td>
+      <td>0.009662</td>
+      <td>-0.004841</td>
+      <td>0.031886</td>
       <td>...</td>
-      <td>0.144254</td>
-      <td>0.052055</td>
-      <td>0.084368</td>
-      <td>-0.037805</td>
-      <td>0.096895</td>
-      <td>-0.065028</td>
-      <td>0.026114</td>
-      <td>0.005929</td>
-      <td>0.143086</td>
+      <td>0.027459</td>
+      <td>-0.019358</td>
+      <td>0.032893</td>
+      <td>0.008513</td>
+      <td>0.021457</td>
+      <td>0.052109</td>
+      <td>-0.023725</td>
+      <td>0.029643</td>
+      <td>0.044543</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.283491</td>
-      <td>-0.088761</td>
-      <td>0.229946</td>
-      <td>-0.034866</td>
-      <td>0.278287</td>
-      <td>-0.053873</td>
-      <td>0.061809</td>
-      <td>-0.223259</td>
-      <td>-0.220632</td>
+      <td>-0.182379</td>
+      <td>-0.019882</td>
+      <td>0.074458</td>
+      <td>-0.164423</td>
+      <td>-0.187085</td>
+      <td>-0.119363</td>
+      <td>-0.022467</td>
+      <td>-0.072722</td>
+      <td>-0.037272</td>
       <td>...</td>
-      <td>-0.036292</td>
-      <td>0.018864</td>
-      <td>-0.116040</td>
-      <td>-0.153706</td>
-      <td>0.044965</td>
-      <td>0.136476</td>
-      <td>-0.069549</td>
-      <td>-0.005644</td>
-      <td>0.021088</td>
+      <td>0.016650</td>
+      <td>-0.080298</td>
+      <td>-0.027779</td>
+      <td>-0.000927</td>
+      <td>0.053211</td>
+      <td>-0.035908</td>
+      <td>-0.119421</td>
+      <td>0.003319</td>
+      <td>-0.028239</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>-0.213099</td>
-      <td>-0.052570</td>
-      <td>0.150552</td>
-      <td>-0.027003</td>
-      <td>0.351577</td>
-      <td>-0.118623</td>
-      <td>-0.079965</td>
-      <td>0.096851</td>
-      <td>0.289816</td>
+      <td>0.010424</td>
+      <td>0.004845</td>
+      <td>-0.139064</td>
+      <td>0.027704</td>
+      <td>-0.112248</td>
+      <td>0.141588</td>
+      <td>0.043361</td>
+      <td>-0.136916</td>
+      <td>-0.034576</td>
       <td>...</td>
-      <td>0.077403</td>
-      <td>-0.109959</td>
-      <td>0.023749</td>
-      <td>-0.027567</td>
-      <td>-0.015360</td>
-      <td>-0.108827</td>
-      <td>0.076566</td>
-      <td>0.123479</td>
-      <td>-0.054462</td>
+      <td>0.035082</td>
+      <td>0.008981</td>
+      <td>0.053524</td>
+      <td>0.024143</td>
+      <td>0.022006</td>
+      <td>-0.031419</td>
+      <td>-0.020536</td>
+      <td>0.012931</td>
+      <td>-0.010228</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.069812</td>
-      <td>-0.017989</td>
-      <td>-0.024301</td>
-      <td>0.072706</td>
-      <td>0.005293</td>
-      <td>0.011781</td>
-      <td>-0.012406</td>
-      <td>0.031740</td>
-      <td>0.052686</td>
+      <td>-0.026787</td>
+      <td>0.021781</td>
+      <td>-0.127566</td>
+      <td>-0.000171</td>
+      <td>-0.099949</td>
+      <td>0.118858</td>
+      <td>0.022723</td>
+      <td>-0.115745</td>
+      <td>-0.057507</td>
       <td>...</td>
-      <td>-0.004005</td>
-      <td>-0.022047</td>
-      <td>-0.012791</td>
-      <td>0.018577</td>
-      <td>-0.023309</td>
-      <td>-0.004288</td>
-      <td>-0.021912</td>
-      <td>0.016455</td>
-      <td>-0.033723</td>
+      <td>0.010047</td>
+      <td>0.027413</td>
+      <td>-0.056307</td>
+      <td>0.038058</td>
+      <td>0.042651</td>
+      <td>-0.058196</td>
+      <td>0.011198</td>
+      <td>0.052674</td>
+      <td>0.026050</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 144 columns</p>
+<p>5 rows × 146 columns</p>
 </div></div></div>
 </div>
-<p>Setelah dilakukan PCA, ukuran data berubah menjadi 200 × 142. Setiap fitur hasil reduksi direpresentasikan sebagai PC1, PC2, hingga PC142.</p>
+<p>Setelah dilakukan PCA, ukuran data berubah menjadi 200 × 144. Setiap fitur hasil reduksi direpresentasikan sebagai PC1, PC2, hingga PC144.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"pca_berita.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1576,16 +1619,16 @@ Total dimensi awal: 5211
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "enwebmining"
+            mode: "python"
         },
         kernelOptions: {
-            name: "enwebmining",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'enwebmining'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
