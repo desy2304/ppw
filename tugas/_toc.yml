@@ -5,4 +5,4 @@ format: jb-book
 root: intro
 chapters:
 - file: Pengantar Web Mining
-- file: Scraping crawling
+- file: Scraping dan crawling
