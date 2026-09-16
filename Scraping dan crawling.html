@@ -65,6 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Representasi TF-IDF dan Reduksi Dimensi Data Berita" href="tf-idf%20dan%20reduksi%20dimensi%20data.html" />
     <link rel="prev" title="Pengantar Web Mining" href="Pengantar%20Web%20Mining.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -225,6 +226,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Crawling Data</a></li>
 
 
+<li class="toctree-l1"><a class="reference internal" href="tf-idf%20dan%20reduksi%20dimensi%20data.html">Representasi TF-IDF dan Reduksi Dimensi Data Berita</a></li>
 </ul>
 
     </div>
@@ -514,15 +516,53 @@ Finance: 100
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 1/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 2/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 3/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 4/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 5/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 6/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 7/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 8/100
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">trafilatura</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">26</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="nb">print</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">gagal</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> 
+<span class="ne">---&gt; </span><span class="mi">26</span> <span class="n">data_sport</span><span class="p">,</span> <span class="n">gagal_sport</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_sport</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">data_finance</span><span class="p">,</span> <span class="n">gagal_finance</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_finance</span><span class="p">,</span> <span class="s2">"finance"</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> 
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data Sport Berhasil di Ekstrak: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">, Gagal: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gagal_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named 'trafilatura'
+<span class="nn">Cell In[2], line 21,</span> in <span class="ni">ekstrak_dataset</span><span class="nt">(links, label)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>             <span class="n">gagal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> 
+<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"</span><span class="se">\r</span><span class="s2">"</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">21</span>         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="nb">print</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">gagal</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -661,6 +701,15 @@ Finance: 100
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Pengantar Web Mining</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="tf-idf%20dan%20reduksi%20dimensi%20data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Representasi TF-IDF dan Reduksi Dimensi Data Berita</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
