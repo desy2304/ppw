@@ -424,7 +424,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-vocabulary">Pembentukan Vocabulary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-berita-dengan-tf-idf">Representasi Berita dengan TF-IDF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-dengan-pca">Reduksi Dimensi dengan PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-dengan-pca">Reduksi Dimensi dengan PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-pca">Visualisasi PCA</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -824,6 +827,9 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 8/200
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 9/200
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
@@ -871,22 +877,42 @@
 <span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1">#step 6</span>
 <span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
 
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:75,</span> in <span class="ni">Context.start_stemming_process</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="bp">self</span><span class="o">.</span><span class="n">removals</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="c1">#step 2, 3</span>
-<span class="ne">---&gt; </span><span class="mi">75</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_suffixes</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">return</span>
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:85,</span> in <span class="ni">Context.start_stemming_process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="k">return</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span> <span class="c1">#ECS loop pengembalian akhiran</span>
+<span class="ne">---&gt; </span><span class="mi">85</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop_pengembalian_akhiran</span><span class="p">()</span>
 
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:94,</span> in <span class="ni">Context.remove_suffixes</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="k">def</span><span class="w"> </span><span class="nf">remove_suffixes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept_visitors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">suffix_visitors</span><span class="p">)</span>
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:141,</span> in <span class="ni">Context.loop_pengembalian_akhiran</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>     <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span> <span class="o">=</span> <span class="n">removal</span><span class="o">.</span><span class="n">get_subject</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="c1">#step 4,5</span>
+<span class="ne">--&gt; </span><span class="mi">141</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_prefixes</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span>     <span class="k">return</span>
 
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:104,</span> in <span class="ni">Context.accept_visitors</span><span class="nt">(self, visitors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
-<span class="ne">--&gt; </span><span class="mi">104</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_is_stopped</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:89,</span> in <span class="ni">Context.remove_prefixes</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="k">def</span><span class="w"> </span><span class="nf">remove_prefixes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">89</span>         <span class="bp">self</span><span class="o">.</span><span class="n">accept_prefix_visitors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix_pisitors</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="k">return</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:110,</span> in <span class="ni">Context.accept_prefix_visitors</span><span class="nt">(self, visitors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">removalCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">removals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">for</span> <span class="n">visitor</span> <span class="ow">in</span> <span class="n">visitors</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">visitor</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:97,</span> in <span class="ni">Context.accept</span><span class="nt">(self, visitor)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">def</span><span class="w"> </span><span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">97</span>     <span class="n">visitor</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Visitor/AbstractDisambiguatePrefixRule.py:15,</span> in <span class="ni">AbstractDisambiguatePrefixRule.visit</span><span class="nt">(self, context)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">disambiguator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">disambiguators</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">disambiguator</span><span class="o">.</span><span class="n">disambiguate</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">current_word</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">break</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1470,121 +1496,121 @@ Total dimensi awal: 5335
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-0.124400</td>
-      <td>-0.011088</td>
-      <td>0.033212</td>
-      <td>-0.116010</td>
-      <td>-0.113935</td>
-      <td>-0.049799</td>
-      <td>0.005385</td>
-      <td>-0.090367</td>
-      <td>-0.058656</td>
+      <td>-0.124398</td>
+      <td>-0.011089</td>
+      <td>0.033206</td>
+      <td>-0.116005</td>
+      <td>-0.113941</td>
+      <td>-0.049804</td>
+      <td>0.005374</td>
+      <td>-0.090359</td>
+      <td>-0.058659</td>
       <td>...</td>
-      <td>-0.057029</td>
-      <td>-0.003386</td>
-      <td>-0.015630</td>
-      <td>0.028462</td>
-      <td>0.042292</td>
-      <td>0.086063</td>
-      <td>0.095085</td>
-      <td>-0.003322</td>
-      <td>0.003741</td>
+      <td>0.047614</td>
+      <td>-0.012722</td>
+      <td>0.012781</td>
+      <td>-0.099012</td>
+      <td>0.065524</td>
+      <td>-0.060036</td>
+      <td>-0.066674</td>
+      <td>-0.033010</td>
+      <td>0.002671</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
       <td>-0.137792</td>
-      <td>-0.019039</td>
-      <td>0.040574</td>
-      <td>-0.126531</td>
-      <td>-0.225088</td>
+      <td>-0.019040</td>
+      <td>0.040569</td>
+      <td>-0.126533</td>
+      <td>-0.225090</td>
       <td>-0.126963</td>
-      <td>0.009662</td>
-      <td>-0.004841</td>
-      <td>0.031886</td>
+      <td>0.009653</td>
+      <td>-0.004856</td>
+      <td>0.031883</td>
       <td>...</td>
-      <td>0.027459</td>
-      <td>-0.019358</td>
-      <td>0.032893</td>
-      <td>0.008513</td>
-      <td>0.021457</td>
-      <td>0.052109</td>
-      <td>-0.023725</td>
-      <td>0.029643</td>
-      <td>0.044543</td>
+      <td>-0.017891</td>
+      <td>0.013063</td>
+      <td>-0.083483</td>
+      <td>0.012201</td>
+      <td>0.023940</td>
+      <td>-0.036590</td>
+      <td>-0.005847</td>
+      <td>-0.017346</td>
+      <td>-0.017771</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
       <td>-0.182379</td>
-      <td>-0.019882</td>
-      <td>0.074458</td>
-      <td>-0.164423</td>
-      <td>-0.187085</td>
-      <td>-0.119363</td>
-      <td>-0.022467</td>
-      <td>-0.072722</td>
-      <td>-0.037272</td>
+      <td>-0.019881</td>
+      <td>0.074463</td>
+      <td>-0.164427</td>
+      <td>-0.187093</td>
+      <td>-0.119358</td>
+      <td>-0.022457</td>
+      <td>-0.072715</td>
+      <td>-0.037258</td>
       <td>...</td>
-      <td>0.016650</td>
-      <td>-0.080298</td>
-      <td>-0.027779</td>
-      <td>-0.000927</td>
-      <td>0.053211</td>
-      <td>-0.035908</td>
-      <td>-0.119421</td>
-      <td>0.003319</td>
-      <td>-0.028239</td>
+      <td>0.046350</td>
+      <td>-0.006992</td>
+      <td>-0.052981</td>
+      <td>0.058430</td>
+      <td>-0.123601</td>
+      <td>0.068690</td>
+      <td>0.030695</td>
+      <td>-0.009491</td>
+      <td>-0.060337</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>0.010424</td>
-      <td>0.004845</td>
-      <td>-0.139064</td>
-      <td>0.027704</td>
-      <td>-0.112248</td>
-      <td>0.141588</td>
-      <td>0.043361</td>
-      <td>-0.136916</td>
-      <td>-0.034576</td>
+      <td>0.010425</td>
+      <td>0.004844</td>
+      <td>-0.139063</td>
+      <td>0.027707</td>
+      <td>-0.112256</td>
+      <td>0.141587</td>
+      <td>0.043377</td>
+      <td>-0.136908</td>
+      <td>-0.034577</td>
       <td>...</td>
-      <td>0.035082</td>
-      <td>0.008981</td>
-      <td>0.053524</td>
-      <td>0.024143</td>
-      <td>0.022006</td>
-      <td>-0.031419</td>
-      <td>-0.020536</td>
-      <td>0.012931</td>
-      <td>-0.010228</td>
+      <td>-0.039797</td>
+      <td>-0.013377</td>
+      <td>-0.005045</td>
+      <td>0.027791</td>
+      <td>-0.025402</td>
+      <td>-0.051107</td>
+      <td>0.052651</td>
+      <td>0.015648</td>
+      <td>-0.019603</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.026787</td>
-      <td>0.021781</td>
-      <td>-0.127566</td>
-      <td>-0.000171</td>
-      <td>-0.099949</td>
-      <td>0.118858</td>
-      <td>0.022723</td>
-      <td>-0.115745</td>
-      <td>-0.057507</td>
+      <td>-0.026788</td>
+      <td>0.021782</td>
+      <td>-0.127564</td>
+      <td>-0.000172</td>
+      <td>-0.099953</td>
+      <td>0.118872</td>
+      <td>0.022734</td>
+      <td>-0.115752</td>
+      <td>-0.057480</td>
       <td>...</td>
-      <td>0.010047</td>
-      <td>0.027413</td>
-      <td>-0.056307</td>
-      <td>0.038058</td>
-      <td>0.042651</td>
-      <td>-0.058196</td>
-      <td>0.011198</td>
-      <td>0.052674</td>
-      <td>0.026050</td>
+      <td>-0.023386</td>
+      <td>0.009931</td>
+      <td>-0.070041</td>
+      <td>-0.022650</td>
+      <td>-0.038488</td>
+      <td>-0.061121</td>
+      <td>0.030297</td>
+      <td>0.007804</td>
+      <td>-0.019574</td>
       <td>sport</td>
     </tr>
   </tbody>
@@ -1607,6 +1633,32 @@ Total dimensi awal: 5335
 </div>
 </div>
 <p>Hasil akhir PCA kemudian disimpan dalam file pca_berita.csv.</p>
+<section id="visualisasi-pca">
+<h3>Visualisasi PCA<a class="headerlink" href="#visualisasi-pca" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">label_value</span><span class="p">,</span> <span class="n">warna</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">'sport'</span><span class="p">,</span> <span class="s1">'finance'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'#1D9E75'</span><span class="p">,</span> <span class="s1">'#D85A30'</span><span class="p">]):</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">pca_df</span><span class="p">[</span><span class="n">pca_df</span><span class="p">[</span><span class="s1">'label'</span><span class="p">]</span> <span class="o">==</span> <span class="n">label_value</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s1">'PC1'</span><span class="p">],</span> <span class="n">subset</span><span class="p">[</span><span class="s1">'PC2'</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label_value</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">warna</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'PC1'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'PC2'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Visualisasi Berita di Ruang PCA (2 Komponen Pertama)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0586bf4f84dbd221deef84b9d9fe713b43c08bebf53e0085e46785ee2a99d322.png" src="_images/0586bf4f84dbd221deef84b9d9fe713b43c08bebf53e0085e46785ee2a99d322.png" />
+</div>
+</div>
+<p>Hasil menunjukkan penyebaran berita sport dan finance berdasarkan PC1 dan PC2. Titik hijau adalah berita sport, sedangkan titik oranye adalah finance. Terlihat berita sport lebih banyak di sebelah kiri, sementara finance lebih banyak di sebelah kanan. Artinya, kedua kategori berita memiliki pola yang cukup berbeda setelah direduksi dengan PCA.</p>
+</section>
 </section>
 </section>
 
@@ -1671,7 +1723,10 @@ Total dimensi awal: 5335
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-vocabulary">Pembentukan Vocabulary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-berita-dengan-tf-idf">Representasi Berita dengan TF-IDF</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-dengan-pca">Reduksi Dimensi dengan PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reduksi-dimensi-dengan-pca">Reduksi Dimensi dengan PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-pca">Visualisasi PCA</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
