@@ -452,31 +452,31 @@
 <section id="import-dataset-ke-orange">
 <h2>1. Import Dataset ke Orange<a class="headerlink" href="#import-dataset-ke-orange" title="Link to this heading">#</a></h2>
 <p>Langkah pertama adalah memasukkan dataset ke dalam Orange menggunakan widget CSV File Import.</p>
-<p><img alt="image.png" src="attachment:image.png" /></p>
+<p><img alt="Image.png" src="_images/Screenshot-2026-09-23-224237.png" /></p>
 </section>
 <section id="memilih-kolom-data">
 <h2>2. Memilih Kolom Data<a class="headerlink" href="#memilih-kolom-data" title="Link to this heading">#</a></h2>
 <p>Setelah dataset berhasil dimuat, tambahkan widget Select Column. Lalu hubungkan CSV file import ke select columns.</p>
-<p><img alt="image-2.png" src="attachment:image-2.png" /></p>
+<p><img alt="image-2.png" src="_images/Screenshot-2026-09-23-224334.png" /></p>
 <p>Di dalam widget select columns pilih semua features PC1-PC144, meta id serta targetnya adalah label/kategori.</p>
 </section>
 <section id="membagi-dataset-dengan-data-sampler">
 <h2>3. Membagi Dataset dengan Data Sampler<a class="headerlink" href="#membagi-dataset-dengan-data-sampler" title="Link to this heading">#</a></h2>
 <p>Dataset kemudian dibagi menjadi data training dan data testing menggunakan widget Data Sampler. Hubungkan select columns dengan data sampler.</p>
-<p><img alt="image.png" src="attachment:image.png" /></p>
+<p><img alt="image.png" src="_images/Screenshot-2026-09-23-224443.png" /></p>
 <p>Pada data sampler, gunakan pengaturan sampling type fixed proportion of data, dengan proportion 80%.</p>
 </section>
 <section id="membuat-model-naive-bayes">
 <h2>4. Membuat Model Naive Bayes<a class="headerlink" href="#membuat-model-naive-bayes" title="Link to this heading">#</a></h2>
 <p>Selanjutnya tambahkan widget Naive bayes. Kemudian hubungkan data sampler dengan model naive bayes dengan koneksi data sample</p>
-<p><img alt="image.png" src="attachment:image.png" /></p>
+<p><img alt="image.png" src="_images/Screenshot-2026-09-23-224815.png" /></p>
 </section>
 <section id="evaluasi-model">
 <h2>5. Evaluasi Model<a class="headerlink" href="#evaluasi-model" title="Link to this heading">#</a></h2>
 <p>Tambahkan widget Test &amp; Score. Hubungkan data sampler dan test &amp; score dengan dua koneksi yaitu, koneksi data sample dengan data dan koneksi remaining data dengan test data.</p>
 <p>Hubungkan juga model naive bayes dengan test &amp; score</p>
-<p><img alt="image.png" src="attachment:image.png" /></p>
-<p><img alt="image-2.png" src="attachment:image-2.png" /></p>
+<p><img alt="image.png" src="_images/Screenshot-2026-09-23-225324.png" /></p>
+<p><img alt="image-2.png" src="_images/Screenshot-2026-09-23-225406.png" /></p>
 <p>Dalam konfigurasi test &amp; score, pilih test on test data.</p>
 <p>Dengan konfigurasi tersebut, model naive bayes dilatih menggunakan 160 data training, kemudian diuji menggunakan 40 data testing.</p>
 <p>Berdasarkan hasil test &amp; score, algoritma naive bayes memperoleh accuracy sebesar 85% dengan F1 0.850 ; Prec 0.855 ; recall 0.850</p>
