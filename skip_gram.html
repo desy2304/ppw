@@ -1,0 +1,1382 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'skip_gram';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Representasi TF-IDF dan Reduksi Dimensi Data Berita" href="tf-idf%20dan%20reduksi%20dimensi%20data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/profil.jpeg" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="_static/profil.jpeg" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Pencarian dan Penambangan Web
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Pengantar%20Web%20Mining.html">Pengantar Web Mining</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Scraping%20dan%20crawling.html">Crawling Data</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="tf-idf%20dan%20reduksi%20dimensi%20data.html">Representasi TF-IDF dan Reduksi Dimensi Data Berita</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fskip_gram.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/skip_gram.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-membaca-dataset">1. Import Library dan Membaca Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyiapkan-stopword-dan-stemming">2. Menyiapkan Stopword dan Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-teks">3. Preprocessing Teks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-pasangan-target-dan-konteks">4. Membuat Pasangan Target dan Konteks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-word2vec-dengan-skip-gram">5. Membuat Model Word2Vec dengan Skip-gram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-word-embedding">6. Menampilkan Word Embedding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-hasil-word-embedding">7. Menyimpan Hasil Word Embedding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-vektor-setiap-berita">8. Membuat Vektor Setiap Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membentuk-vektor-untuk-seluruh-berita">9. Membentuk Vektor untuk Seluruh Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-fitur-dan-label">10. Menentukan Fitur dan Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes">11. Klasifikasi Menggunakan Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-menggunakan-accuracy-dan-classification-report">12. Evaluasi Menggunakan Accuracy dan Classification Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">13. Confusion Matrix</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="skip-gram-untuk-klasifikasi-data-berita-menggunakan-naive-bayes">
+<h1>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes<a class="headerlink" href="#skip-gram-untuk-klasifikasi-data-berita-menggunakan-naive-bayes" title="Link to this heading">#</a></h1>
+<section id="import-library-dan-membaca-dataset">
+<h2>1. Import Library dan Membaca Dataset<a class="headerlink" href="#import-library-dan-membaca-dataset" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini dilakukan import library yang diperlukan untuk proses pengolahan teks, pembuatan word embedding menggunakan Word2Vec Skip-gram, klasifikasi menggunakan Naive Bayes, serta evaluasi model.</p>
+<p>Dataset berita kemudian dibaca menggunakan pandas. Dataset terdiri dari 200 data dengan tiga kolom, yaitu id, isi_berita, dan label.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">emoji</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_tokenize</span>
+
+<span class="c1"># Membaca dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"dataset_berita.csv"</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">emoji</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'gensim'
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="menyiapkan-stopword-dan-stemming">
+<h2>2. Menyiapkan Stopword dan Stemming<a class="headerlink" href="#menyiapkan-stopword-dan-stemming" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini digunakan library Sastrawi untuk melakukan preprocessing teks Bahasa Indonesia.</p>
+<p>Stopword digunakan untuk menghapus kata-kata umum yang kurang memberikan informasi penting dalam proses klasifikasi. Sedangkan stemming digunakan untuk mengubah kata menjadi bentuk dasarnya.</p>
+<p>Hasil dari tahap ini akan digunakan pada proses preprocessing berita.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.StopWordRemover.StopWordRemoverFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StopWordRemoverFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Sastrawi.Stemmer.StemmerFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">StemmerFactory</span>
+
+<span class="c1"># Membuat daftar stopword Bahasa Indonesia</span>
+<span class="n">stop_factory</span> <span class="o">=</span> <span class="n">StopWordRemoverFactory</span><span class="p">()</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stop_factory</span><span class="o">.</span><span class="n">get_stop_words</span><span class="p">())</span>
+
+<span class="c1"># Membuat stemmer Bahasa Indonesia</span>
+<span class="n">stem_factory</span> <span class="o">=</span> <span class="n">StemmerFactory</span><span class="p">()</span>
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">stem_factory</span><span class="o">.</span><span class="n">create_stemmer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing-teks">
+<h2>3. Preprocessing Teks<a class="headerlink" href="#preprocessing-teks" title="Link to this heading">#</a></h2>
+<p>Tahap preprocessing dilakukan untuk membersihkan dan mempersiapkan teks sebelum digunakan dalam proses Word2Vec.</p>
+<p>Tahapan yang dilakukan meliputi:</p>
+<ol class="arabic simple">
+<li><p>Mengubah seluruh teks menjadi huruf kecil.</p></li>
+<li><p>Menghapus tanda baca.</p></li>
+<li><p>Menghapus angka.</p></li>
+<li><p>Melakukan tokenisasi dengan memisahkan teks menjadi kata-kata.</p></li>
+<li><p>Menghapus stopword.</p></li>
+<li><p>Melakukan stemming untuk mengubah kata menjadi bentuk dasarnya.</p></li>
+</ol>
+<p>Hasil akhir dari proses ini disimpan dalam token_preprocessing dan akan digunakan sebagai data masukan untuk proses Skip-gram.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_preprocessing</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">teks</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">"isi_berita"</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">():</span>
+
+    <span class="c1"># 1. Mengubah teks menjadi huruf kecil</span>
+    <span class="n">teks</span> <span class="o">=</span> <span class="n">teks</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># 2. Menghapus tanda baca</span>
+    <span class="n">teks</span> <span class="o">=</span> <span class="n">teks</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+
+    <span class="c1"># 3. Menghapus angka</span>
+    <span class="n">teks</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\d+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">teks</span><span class="p">)</span>
+
+    <span class="c1"># 4. Tokenisasi</span>
+    <span class="n">kata</span> <span class="o">=</span> <span class="n">teks</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="c1"># 5. Menghapus stopword</span>
+    <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+
+    <span class="c1"># 6. Stemming</span>
+    <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span><span class="p">]</span>
+
+    <span class="n">token_preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kata</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan hasil preprocessing 3 berita pertama</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">token_preprocessing</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Berita </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Berita 1:
+['hamza', 'abdelkarim', 'kagum', 'erling', 'haaland', 'striker', 'muda', 'barcelona', 'mau', 'jadi', 'haaland', 'sungai', 'nil', 'hamza', 'abdelkarim', 'striker', 'muda', 'barcelona', 'asal', 'mesir', 'usia', 'tahun', 'musim', 'hamza', 'masuk', 'skuad', 'utama', 'barca', 'belum', 'main', 'tim', 'akademi', 'musim', 'lalu', 'baca', 'thierry', 'henry', 'suka', 'erling', 'haaland', 'hamza', 'abdelkarim', 'kagum', 'erling', 'haaland', 'bagi', 'haaland', 'striker', 'top', 'haaland', 'serang', 'hebat', 'luar', 'biasa', 'cetak', 'gol', 'selalu', 'ada', 'posisi', 'tepat', 'laku', 'buka', 'lansir', 'tribuna', 'selalu', 'ajar', 'main', 'hebat', 'amat', 'cara', 'main', 'aku', 'senang', 'juluk', 'haaland', 'sungai', 'nil', 'tegas', 'hamza', 'abdelkarim', 'mau', 'ajar', 'banyak', 'diri', 'mau', 'baik', 'beberapa', 'aspek', 'beri', 'percaya', 'lebih', 'latih', 'hansi', 'flick', 'aku', 'mau', 'cetak', 'banyak', 'gol', 'tang', 'trofi', 'halhal', 'perlu', 'aku', 'baik', 'aspekaspek', 'mana', 'aku', 'kembang', 'gaya', 'main', 'barcelona', 'beda', 'tim', 'mana', 'aku', 'sedang', 'proses', 'adaptasi', 'tutup', 'affpur']
+
+Berita 2:
+['kontrak', 'luke', 'shaw', 'manchester', 'united', 'habis', 'akhir', 'musim', 'tiada', 'tandatanda', 'kontrak', 'panjang', 'kontrak', 'luke', 'shaw', 'habis', 'juni', 'shaw', 'kuat', 'manchester', 'united', 'sejak', 'tahun', 'baca', 'bintang', 'muda', 'jj', 'gabriel', 'mau', 'tinggal', 'mu', 'lansir', 'mirror', 'manchester', 'united', 'yakin', 'panjang', 'kontrak', 'luke', 'shaw', 'mu', 'renovasi', 'besarbesaran', 'lini', 'belakang', 'bursa', 'transfer', 'musim', 'panas', 'beli', 'bekbek', 'baru', 'shaw', 'dulu', 'beli', 'mu', 'southampton', 'shaw', 'tebus', 'harga', 'juta', 'euro', 'hitung', 'angka', 'besar', 'baca', 'start', 'mu', 'era', 'carrick', 'amorim', 'sama', 'nih', 'luke', 'shaw', 'total', 'emas', 'tampil', 'buat', 'manchester', 'united', 'seluruh', 'kompetisi', 'empat', 'titel', 'raih', 'titel', 'liga', 'europa', 'piala', 'fa', 'menang', 'kali', 'carabao', 'cup', 'shaw', 'lebih', 'banyak', 'ganggu', 'cedera', 'cedera', 'otot', 'hantu', 'pernah', 'alami', 'patah', 'tulang', 'tibia', 'fibula', 'kaki', 'kanan', 'absen', 'lama', 'laga', 'main', 'usia', 'tahun', 'jadi', 'percaya', 'latih', 'michael', 'carrick', 'faktor', 'bugar', 'selalu', 'jadi', 'batu', 'sandungan', 'affyna']
+
+Berita 3:
+['erling', 'haaland', 'main', 'bagus', 'manchester', 'city', 'timnas', 'norwegia', 'musim', 'lalu', 'main', 'usia', 'tahun', 'sebut', 'pantas', 'raih', 'ballon', 'dor', 'sama', 'man', 'city', 'musim', 'lalu', 'haaland', 'tampil', 'produktif', 'mampu', 'sumbang', 'gol', 'sembilan', 'assist', 'tanding', 'kontribusi', 'haaland', 'mampu', 'tang', 'piala', 'liga', 'inggris', 'piala', 'fa', 'sama', 'man', 'city', 'catat', 'jelas', 'cukup', 'oke', 'mantan', 'main', 'borussia', 'dortmund', 'baca', 'haaland', 'buat', 'apa', 'seringsering', 'pegang', 'bola', 'sama', 'norwegia', 'haaland', 'mampu', 'tembus', 'empat', 'final', 'piala', 'dunia', 'haaland', 'emas', 'tujuh', 'gol', 'semua', 'modal', 'haaland', 'yakin', 'mantan', 'main', 'norwegia', 'jan', 'age', 'fjortoft', 'layak', 'tang', 'ballon', 'dor', 'kalian', 'bilang', 'subjektif', 'orang', 'norwegia', 'jelas', 'erling', 'haaland', 'menang', 'ballon', 'dor', 'kata', 'jan', 'age', 'fjortoft', 'kutip', 'sportskeeda', 'trofi', 'inggris', 'musim', 'lalu', 'gol', 'klub', 'negara', 'jadi', 'bintang', 'global', 'piala', 'dunia', 'pegang', 'peran', 'besar', 'jalan', 'norwegia', 'hingga', 'babak', 'empat', 'final', 'kata', 'tambah', 'caspur']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="membuat-pasangan-target-dan-konteks">
+<h2>4. Membuat Pasangan Target dan Konteks<a class="headerlink" href="#membuat-pasangan-target-dan-konteks" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini dibuat pasangan kata target dan kata konteks sebagai bagian dari proses Skip-gram.</p>
+<p>Parameter window = 1 digunakan sehingga setiap kata akan melihat satu kata di sebelah kiri dan satu kata di sebelah kanan sebagai konteks.</p>
+<p>Hasilnya berupa tabel yang memiliki dua kolom, yaitu Target dan Konteks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">data_target_context</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">kalimat</span> <span class="ow">in</span> <span class="n">token_preprocessing</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kalimat</span><span class="p">):</span>
+
+        <span class="c1"># Kata di sebelah kiri</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">-</span> <span class="n">window</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">data_target_context</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">"Target"</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span>
+                <span class="s2">"Konteks"</span><span class="p">:</span> <span class="n">kalimat</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">})</span>
+
+        <span class="c1"># Kata di sebelah kanan</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">window</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">kalimat</span><span class="p">):</span>
+            <span class="n">data_target_context</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">"Target"</span><span class="p">:</span> <span class="n">target</span><span class="p">,</span>
+                <span class="s2">"Konteks"</span><span class="p">:</span> <span class="n">kalimat</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">})</span>
+
+<span class="n">df_target_context</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data_target_context</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df_target_context</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah pasangan target-konteks:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_target_context</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Target</th>
+      <th>Konteks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>hamza</td>
+      <td>abdelkarim</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>abdelkarim</td>
+      <td>hamza</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>abdelkarim</td>
+      <td>kagum</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>kagum</td>
+      <td>abdelkarim</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>kagum</td>
+      <td>erling</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>90169</th>
+      <td>penuh</td>
+      <td>masyarakat</td>
+    </tr>
+    <tr>
+      <th>90170</th>
+      <td>penuh</td>
+      <td>wajib</td>
+    </tr>
+    <tr>
+      <th>90171</th>
+      <td>wajib</td>
+      <td>penuh</td>
+    </tr>
+    <tr>
+      <th>90172</th>
+      <td>wajib</td>
+      <td>hnuega</td>
+    </tr>
+    <tr>
+      <th>90173</th>
+      <td>hnuega</td>
+      <td>wajib</td>
+    </tr>
+  </tbody>
+</table>
+<p>90174 rows × 2 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah pasangan target-konteks: 90174
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="membuat-model-word2vec-dengan-skip-gram">
+<h2>5. Membuat Model Word2Vec dengan Skip-gram<a class="headerlink" href="#membuat-model-word2vec-dengan-skip-gram" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini dibuat model Word2Vec menggunakan metode Skip-gram.</p>
+<p>Parameter sg=1 menunjukkan bahwa Word2Vec menggunakan metode Skip-gram. Setiap kata akan direpresentasikan dalam bentuk vektor berdimensi 3 karena menggunakan vector_size=3.</p>
+<p>Parameter window=2 digunakan untuk menentukan jumlah kata di sekitar kata target yang digunakan sebagai konteks. Kata yang muncul kurang dari 2 kali tidak dimasukkan ke dalam vocabulary karena menggunakan min_count=2.</p>
+<p>Model dilatih selama 50 epoch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
+    <span class="n">sentences</span><span class="o">=</span><span class="n">token_preprocessing</span><span class="p">,</span>
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">min_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Model Skip-gram berhasil dibuat"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah kata dalam vocabulary:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Skip-gram berhasil dibuat
+Jumlah kata dalam vocabulary: 3315
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="menampilkan-word-embedding">
+<h2>6. Menampilkan Word Embedding<a class="headerlink" href="#menampilkan-word-embedding" title="Link to this heading">#</a></h2>
+<p>Setelah model Skip-gram selesai dilatih, setiap kata dalam vocabulary memiliki representasi berupa vektor.</p>
+<p>Karena vector_size=3, setiap kata memiliki tiga nilai vektor, yaitu Vektor 1, Vektor 2, dan Vektor 3.</p>
+<p>Hasil word embedding kemudian ditampilkan dalam bentuk DataFrame agar lebih mudah dilihat dan dianalisis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_vektor</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">:</span>
+
+    <span class="n">vektor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">]</span>
+
+    <span class="n">data_vektor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">kata</span><span class="p">]</span> <span class="o">+</span> <span class="n">vektor</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="p">)</span>
+
+<span class="n">df_vektor</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data_vektor</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"Kata"</span><span class="p">,</span>
+        <span class="s2">"Vektor 1"</span><span class="p">,</span>
+        <span class="s2">"Vektor 2"</span><span class="p">,</span>
+        <span class="s2">"Vektor 3"</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">df_vektor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Kata</th>
+      <th>Vektor 1</th>
+      <th>Vektor 2</th>
+      <th>Vektor 3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>jadi</td>
+      <td>-0.777469</td>
+      <td>0.242221</td>
+      <td>0.891298</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>sebut</td>
+      <td>-0.555737</td>
+      <td>0.773251</td>
+      <td>0.988701</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>main</td>
+      <td>-1.384262</td>
+      <td>-0.598625</td>
+      <td>1.151997</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>jakarta</td>
+      <td>0.800397</td>
+      <td>0.558971</td>
+      <td>2.051014</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>indonesia</td>
+      <td>-0.756116</td>
+      <td>0.512971</td>
+      <td>0.851650</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3310</th>
+      <td>amat</td>
+      <td>-0.960412</td>
+      <td>-0.234423</td>
+      <td>0.947376</td>
+    </tr>
+    <tr>
+      <th>3311</th>
+      <td>tribuna</td>
+      <td>-0.720344</td>
+      <td>-0.275172</td>
+      <td>1.158699</td>
+    </tr>
+    <tr>
+      <th>3312</th>
+      <td>akademi</td>
+      <td>-0.405817</td>
+      <td>-0.098585</td>
+      <td>1.049591</td>
+    </tr>
+    <tr>
+      <th>3313</th>
+      <td>nil</td>
+      <td>-1.078008</td>
+      <td>-0.326184</td>
+      <td>0.838722</td>
+    </tr>
+    <tr>
+      <th>3314</th>
+      <td>sungai</td>
+      <td>-1.141644</td>
+      <td>-0.445751</td>
+      <td>0.905581</td>
+    </tr>
+  </tbody>
+</table>
+<p>3315 rows × 4 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="menyimpan-hasil-word-embedding">
+<h2>7. Menyimpan Hasil Word Embedding<a class="headerlink" href="#menyimpan-hasil-word-embedding" title="Link to this heading">#</a></h2>
+<p>Hasil word embedding disimpan dalam format CSV dengan nama hasil_skipgram.csv.</p>
+<p>File ini berisi kata-kata yang terdapat dalam vocabulary beserta nilai vektornya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_vektor</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">"hasil_skipgram.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Hasil word embedding berhasil disimpan."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil word embedding berhasil disimpan.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="membuat-vektor-setiap-berita">
+<h2>8. Membuat Vektor Setiap Berita<a class="headerlink" href="#membuat-vektor-setiap-berita" title="Link to this heading">#</a></h2>
+<p>Word2Vec menghasilkan vektor untuk setiap kata, sedangkan proses klasifikasi membutuhkan representasi untuk setiap berita.</p>
+<p>Oleh karena itu, dibuat fungsi buat_vektor_berita() untuk mengubah kumpulan vektor kata dalam satu berita menjadi satu vektor berita.</p>
+<p>Vektor berita diperoleh dengan menghitung nilai rata-rata dari seluruh vektor kata yang terdapat dalam berita.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buat_vektor_berita</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+
+    <span class="n">vektor_kata</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
+            <span class="n">vektor_kata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vektor_kata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vektor_kata</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="membentuk-vektor-untuk-seluruh-berita">
+<h2>9. Membentuk Vektor untuk Seluruh Berita<a class="headerlink" href="#membentuk-vektor-untuk-seluruh-berita" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini fungsi buat_vektor_berita() diterapkan pada seluruh berita dalam dataset.</p>
+<p>Hasilnya disimpan dalam variabel X. Setiap baris mewakili satu berita, sedangkan setiap kolom mewakili dimensi dari vektor berita.</p>
+<p>Dengan 200 berita dan vector_size=3, ukuran data yang dihasilkan adalah 200 × 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vektor_berita</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">token_preprocessing</span><span class="p">:</span>
+
+    <span class="n">vektor</span> <span class="o">=</span> <span class="n">buat_vektor_berita</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="n">vektor_berita</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vektor</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vektor_berita</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran data:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran data: (200, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buat_vektor_berita</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+
+    <span class="n">vektor_kata</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">:</span>
+            <span class="n">vektor_kata</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vektor_kata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vektor_kata</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kolom_vektor</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">"Vektor </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">vector_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">df_vsm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">kolom_vektor</span>
+<span class="p">)</span>
+
+<span class="n">df_vsm</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">,</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="p">)</span>
+
+<span class="n">df_vsm</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df_vsm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>Vektor 1</th>
+      <th>Vektor 2</th>
+      <th>Vektor 3</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>-1.177703</td>
+      <td>-0.217879</td>
+      <td>1.112942</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>-1.445550</td>
+      <td>-0.308368</td>
+      <td>1.176569</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>-1.488967</td>
+      <td>-0.377753</td>
+      <td>1.194824</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>-0.771093</td>
+      <td>0.472988</td>
+      <td>1.130897</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>-0.900863</td>
+      <td>0.436432</td>
+      <td>1.028400</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>196</td>
+      <td>-0.192280</td>
+      <td>1.026721</td>
+      <td>1.448982</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>197</td>
+      <td>-0.216425</td>
+      <td>-0.050297</td>
+      <td>1.555020</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>198</td>
+      <td>0.112577</td>
+      <td>0.133109</td>
+      <td>1.767392</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>199</td>
+      <td>-0.301265</td>
+      <td>1.090153</td>
+      <td>1.325101</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>200</td>
+      <td>-0.225183</td>
+      <td>0.856821</td>
+      <td>1.422120</td>
+      <td>finance</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 5 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="menentukan-fitur-dan-label">
+<h2>10. Menentukan Fitur dan Label<a class="headerlink" href="#menentukan-fitur-dan-label" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini data dipisahkan menjadi fitur dan label.</p>
+<p>Variabel X berisi tiga nilai vektor dari setiap berita yang digunakan sebagai fitur klasifikasi.</p>
+<p>Variabel y berisi label berita yang menjadi target klasifikasi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fitur berupa vektor berita</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_vsm</span><span class="p">[</span><span class="n">kolom_vektor</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Target berupa label berita</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_vsm</span><span class="p">[</span><span class="s2">"label"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran fitur:"</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah label:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran fitur: (200, 3)
+Jumlah label: 200
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data training :"</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Data testing  :"</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data training : (160, 3)
+Data testing  : (40, 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="klasifikasi-menggunakan-naive-bayes">
+<h2>11. Klasifikasi Menggunakan Naive Bayes<a class="headerlink" href="#klasifikasi-menggunakan-naive-bayes" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini digunakan algoritma Gaussian Naive Bayes untuk melakukan klasifikasi berita.</p>
+<p>Model dilatih menggunakan data training yang terdiri dari vektor berita dan labelnya. Setelah proses pelatihan selesai, model digunakan untuk memprediksi label pada data testing.</p>
+<p>Hasil prediksi disimpan dalam variabel y_pred.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="c1"># Melatih model</span>
+<span class="n">nb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Melakukan prediksi</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">nb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prediksi selesai."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediksi selesai.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluasi-menggunakan-accuracy-dan-classification-report">
+<h2>12. Evaluasi Menggunakan Accuracy dan Classification Report<a class="headerlink" href="#evaluasi-menggunakan-accuracy-dan-classification-report" title="Link to this heading">#</a></h2>
+<p>Pada tahap ini dilakukan evaluasi terhadap hasil klasifikasi.</p>
+<p>Akurasi digunakan untuk mengetahui persentase prediksi yang benar dari seluruh data testing.</p>
+<p>Selain akurasi, digunakan classification report yang menampilkan nilai precision, recall, dan F1-score untuk setiap kelas.</p>
+<p>Berdasarkan hasil pengujian, model memperoleh akurasi sebesar 95% pada 40 data testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">akurasi</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Akurasi:"</span><span class="p">,</span> <span class="n">akurasi</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Classification Report:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.95
+
+Classification Report:
+              precision    recall  f1-score   support
+
+     finance       0.91      1.00      0.95        20
+       sport       1.00      0.90      0.95        20
+
+    accuracy                           0.95        40
+   macro avg       0.95      0.95      0.95        40
+weighted avg       0.95      0.95      0.95        40
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="confusion-matrix">
+<h2>13. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<p>Confusion matrix digunakan untuk melihat jumlah prediksi benar dan salah pada masing-masing kelas.</p>
+<p>Berdasarkan hasil confusion matrix, terdapat 20 data finance yang diprediksi dengan benar sebagai finance dan 18 data sport yang diprediksi dengan benar sebagai sport.</p>
+<p>Terdapat 2 data sport yang diprediksi sebagai finance, sehingga jumlah prediksi yang benar adalah 38 dari 40 data testing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Confusion Matrix:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confusion Matrix:
+[[20  0]
+ [ 2 18]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_vsm</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">"hasil_vector_space_model_skipgram.csv"</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Vector Space Model berhasil disimpan."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vector Space Model berhasil disimpan.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "enwebmining"
+        },
+        kernelOptions: {
+            name: "enwebmining",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'enwebmining'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tf-idf%20dan%20reduksi%20dimensi%20data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Representasi TF-IDF dan Reduksi Dimensi Data Berita</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-membaca-dataset">1. Import Library dan Membaca Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyiapkan-stopword-dan-stemming">2. Menyiapkan Stopword dan Stemming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-teks">3. Preprocessing Teks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-pasangan-target-dan-konteks">4. Membuat Pasangan Target dan Konteks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-word2vec-dengan-skip-gram">5. Membuat Model Word2Vec dengan Skip-gram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-word-embedding">6. Menampilkan Word Embedding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-hasil-word-embedding">7. Menyimpan Hasil Word Embedding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-vektor-setiap-berita">8. Membuat Vektor Setiap Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membentuk-vektor-untuk-seluruh-berita">9. Membentuk Vektor untuk Seluruh Berita</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-fitur-dan-label">10. Menentukan Fitur dan Label</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klasifikasi-menggunakan-naive-bayes">11. Klasifikasi Menggunakan Naive Bayes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-menggunakan-accuracy-dan-classification-report">12. Evaluasi Menggunakan Accuracy dan Classification Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">13. Confusion Matrix</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
