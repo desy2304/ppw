@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Representasi TF-IDF dan Reduksi Dimensi Data Berita &#8212; My sample book</title>
   
@@ -16,85 +17,89 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
   
-  <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tf-idf dan reduksi dimensi data';</script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes" href="skip_gram.html" />
-    <link rel="prev" title="Crawling Data" href="Scraping%20dan%20crawling.html" />
+    <link rel="prev" title="Crawling dan Scraping Data" href="Scraping%20dan%20crawling.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-  
-    
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="searchindex.js"></script>
-  
   </head>
-  <body data-default-mode="">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  
-  <dialog id="pst-search-dialog">
-    
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -102,6 +107,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -109,59 +115,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -170,8 +132,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -201,18 +162,11 @@
     
     
     <img src="_static/profil.jpeg" class="logo__image only-light" alt="My sample book - Home"/>
-    <img src="_static/profil.jpeg" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/profil.jpeg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -225,7 +179,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar%20Web%20Mining.html">Pengantar Web Mining</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="Scraping%20dan%20crawling.html">Crawling Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Scraping%20dan%20crawling.html">Crawling dan Scraping Data</a></li>
+
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Representasi TF-IDF dan Reduksi Dimensi Data Berita</a></li>
@@ -238,14 +193,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -264,9 +214,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -375,7 +325,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  class="btn btn-sm btn-fullscreen-button"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -389,19 +339,27 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -421,7 +379,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="pst-show_toc_level nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-library-nltk">Install Library NLTK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-vocabulary">Pembentukan Vocabulary</a></li>
@@ -442,12 +400,12 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="representasi-tf-idf-dan-reduksi-dimensi-data-berita">
-<h1>Representasi TF-IDF dan Reduksi Dimensi Data Berita<a class="headerlink" href="#representasi-tf-idf-dan-reduksi-dimensi-data-berita" title="Link to this heading">#</a></h1>
+<h1>Representasi TF-IDF dan Reduksi Dimensi Data Berita<a class="headerlink" href="#representasi-tf-idf-dan-reduksi-dimensi-data-berita" title="Permalink to this heading">#</a></h1>
 <p>Setelah data berita berhasil dikumpulkan dan melalui tahap preprocessing, data teks perlu diubah menjadi bentuk numerik agar dapat diolah lebih lanjut. Pada tahap ini, teks berita direpresentasikan menggunakan TF-IDF (Term Frequency–Inverse Document Frequency) untuk memberikan bobot pada setiap kata berdasarkan tingkat kepentingannya dalam dokumen.</p>
 <p>Data hasil TF-IDF memiliki jumlah fitur yang cukup banyak karena setiap kata yang terdapat dalam vocabulary menjadi sebuah fitur. Oleh karena itu, dilakukan reduksi dimensi menggunakan PCA (Principal Component Analysis) untuk mengurangi jumlah fitur dengan tetap mempertahankan sebagian besar informasi dari data.</p>
 <p>Tahapan yang dilakukan meliputi pembentukan vocabulary, representasi teks menggunakan TF-IDF, dan reduksi dimensi menggunakan PCA.</p>
 <section id="install-library-nltk">
-<h2>Install Library NLTK<a class="headerlink" href="#install-library-nltk" title="Link to this heading">#</a></h2>
+<h2>Install Library NLTK<a class="headerlink" href="#install-library-nltk" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
@@ -458,16 +416,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /home/codespace/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]   Package punkt is already up-to-date!
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to C:\Users\triad/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
 [nltk_data] Downloading package punkt_tab to
-[nltk_data]     /home/codespace/nltk_data...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]   Package punkt_tab is already up-to-date!
-[nltk_data] Downloading package words to /home/codespace/nltk_data...
+[nltk_data]     C:\Users\triad/nltk_data...
+[nltk_data]   Package punkt_tab is already up-to-date!
+[nltk_data] Downloading package words to C:\Users\triad/nltk_data...
 [nltk_data]   Package words is already up-to-date!
 </pre></div>
 </div>
@@ -487,70 +441,21 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 3)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"dataset_berita.csv"</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named 'pandas'
 </pre></div>
 </div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>isi_berita</th>
-      <th>label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Hamza Abdelkarim kagumi Erling Haaland. Strike...</td>
-      <td>sport</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Kontrak Luke Shaw di Manchester United akan ha...</td>
-      <td>sport</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Erling Haaland bermain bagus di Manchester Cit...</td>
-      <td>sport</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
-      <td>sport</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
-      <td>sport</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+</div>
 </div>
 </section>
 <section id="preprocessing-data">
-<h2>Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Link to this heading">#</a></h2>
+<h2>Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Permalink to this heading">#</a></h2>
 <p>Data berita yang telah dikumpulkan terlebih dahulu dilakukan preprocessing. Pada tahap cleaning, teks diubah menjadi huruf kecil, URL, emoji, tanda baca, dan angka dihapus, serta spasi yang berlebih dirapikan. Setelah itu, teks diubah menjadi token atau kata-kata menggunakan proses tokenisasi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -597,28 +502,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>Hamza Abdelkarim kagumi Erling Haaland. Strike...</td>
-      <td>hamza abdelkarim kagumi erling haaland striker...</td>
+      <td>Jepang - Austin Krajicek-Nikola Mektic berhasi...</td>
+      <td>jepang austin krajicek nikola mektic berhasil ...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kontrak Luke Shaw di Manchester United akan ha...</td>
-      <td>kontrak luke shaw di manchester united akan ha...</td>
+      <td>Jorge Martin sedang memperjuangkan titel juara...</td>
+      <td>jorge martin sedang memperjuangkan titel juara...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Erling Haaland bermain bagus di Manchester Cit...</td>
-      <td>erling haaland bermain bagus di manchester cit...</td>
+      <td>Rider Indonesia Veda Ega Pratama balapan di Ma...</td>
+      <td>rider indonesia veda ega pratama balapan di ma...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Pengurus Pusat Kickboxing Indonesia (PP KBI) p...</td>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
+      <td>Pelatih speed tim panjat tebing, Fitriyani, me...</td>
+      <td>pelatih speed tim panjat tebing fitriyani meng...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Lina Hisage, atlet tolak peluru asal Wamena, P...</td>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
+      <td>Pertamina Grand Prix of Indonesia 2026 sudah m...</td>
+      <td>pertamina grand prix of indonesia sudah melahi...</td>
     </tr>
   </tbody>
 </table>
@@ -659,28 +564,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>hamza abdelkarim kagumi erling haaland striker...</td>
-      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
+      <td>jepang austin krajicek nikola mektic berhasil ...</td>
+      <td>[jepang, austin, krajicek, nikola, mektic, ber...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>kontrak luke shaw di manchester united akan ha...</td>
-      <td>[kontrak, luke, shaw, di, manchester, united, ...</td>
+      <td>jorge martin sedang memperjuangkan titel juara...</td>
+      <td>[jorge, martin, sedang, memperjuangkan, titel,...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>erling haaland bermain bagus di manchester cit...</td>
-      <td>[erling, haaland, bermain, bagus, di, manchest...</td>
+      <td>rider indonesia veda ega pratama balapan di ma...</td>
+      <td>[rider, indonesia, veda, ega, pratama, balapan...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>pengurus pusat kickboxing indonesia pp kbi per...</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
+      <td>pelatih speed tim panjat tebing fitriyani meng...</td>
+      <td>[pelatih, speed, tim, panjat, tebing, fitriyan...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>lina hisage atlet tolak peluru asal wamena pap...</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
+      <td>pertamina grand prix of indonesia sudah melahi...</td>
+      <td>[pertamina, grand, prix, of, indonesia, sudah,...</td>
     </tr>
   </tbody>
 </table>
@@ -720,7 +625,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['hamza', 'striker', 'barcelona', 'hamza', 'striker', 'barcelona', 'hamza', 'main', 'thierry', 'henry', 'hamza', 'striker', 'tribuna', 'cara', 'hamza', 'flick', 'barcelona', 'sedang']
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['austin', 'ganda', 'japan', 'open', 'sport', 'ganda', 'japan', 'open']
 </pre></div>
 </div>
 </div>
@@ -761,28 +666,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
-      <td>[hamza, abdelkarim, kagumi, erling, haaland, s...</td>
+      <td>[jepang, austin, krajicek, nikola, mektic, ber...</td>
+      <td>[jepang, austin, krajicek, nikola, mektic, ber...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>[kontrak, luke, shaw, di, manchester, united, ...</td>
-      <td>[kontrak, luke, shaw, manchester, united, habi...</td>
+      <td>[jorge, martin, sedang, memperjuangkan, titel,...</td>
+      <td>[jorge, martin, sedang, memperjuangkan, titel,...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>[erling, haaland, bermain, bagus, di, manchest...</td>
-      <td>[erling, haaland, bermain, bagus, manchester, ...</td>
+      <td>[rider, indonesia, veda, ega, pratama, balapan...</td>
+      <td>[rider, indonesia, veda, ega, pratama, balapan...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
-      <td>[pengurus, pusat, kickboxing, indonesia, pp, k...</td>
+      <td>[pelatih, speed, tim, panjat, tebing, fitriyan...</td>
+      <td>[pelatih, speed, panjat, tebing, fitriyani, me...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
-      <td>[lina, hisage, atlet, tolak, peluru, asal, wam...</td>
+      <td>[pertamina, grand, prix, of, indonesia, sudah,...</td>
+      <td>[pertamina, grand, prix, of, indonesia, melahi...</td>
     </tr>
   </tbody>
 </table>
@@ -809,121 +714,66 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 1/200
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 200/200
+Selesai stemming
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 2/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 3/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 4/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 5/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 6/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 7/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 8/200
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stemming progress: 9/200
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">hasil_stem</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> 
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'tokens_no_stopword'</span><span class="p">],</span> <span class="mi">1</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">hasil_stem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\r</span><span class="s2">Stemming progress: </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df</span><span class="p">[</span><span class="s1">'tokens_final'</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasil_stem</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="nn">Cell In[7], line 2,</span> in <span class="ni">stem_tokens</span><span class="nt">(tokens)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">stem_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">return</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/CachedStemmer.py:20,</span> in <span class="ni">CachedStemmer.stem</span><span class="nt">(self, text)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">20</span>     <span class="n">stem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delegatedStemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">stem</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem</span><span class="p">)</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:27,</span> in <span class="ni">Stemmer.stem</span><span class="nt">(self, text)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">stems</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stem_word</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stems</span><span class="p">)</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:36,</span> in <span class="ni">Stemmer.stem_word</span><span class="nt">(self, word)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_plural_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">36</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_singular_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Stemmer.py:84,</span> in <span class="ni">Stemmer.stem_singular_word</span><span class="nt">(self, word)</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span><span class="w"> </span><span class="sd">"""Stem a singular word to its common stem form."""</span>
-<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">visitor_provider</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">84</span> <span class="n">context</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">86</span> <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">result</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:37,</span> in <span class="ni">Context.execute</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="w"> </span><span class="sd">"""Execute stemming process; the result can be retrieved with result"""</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="c1">#step 1 - 5</span>
-<span class="ne">---&gt; </span><span class="mi">37</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_stemming_process</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1">#step 6</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:80,</span> in <span class="ni">Context.start_stemming_process</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">return</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span> <span class="c1">#step 4, 5</span>
-<span class="ne">---&gt; </span><span class="mi">80</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_prefixes</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="k">return</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:89,</span> in <span class="ni">Context.remove_prefixes</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="k">def</span><span class="w"> </span><span class="nf">remove_prefixes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">89</span>         <span class="bp">self</span><span class="o">.</span><span class="n">accept_prefix_visitors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix_pisitors</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="k">return</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:110,</span> in <span class="ni">Context.accept_prefix_visitors</span><span class="nt">(self, visitors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">removalCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">removals</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">for</span> <span class="n">visitor</span> <span class="ow">in</span> <span class="n">visitors</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">visitor</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Context.py:97,</span> in <span class="ni">Context.accept</span><span class="nt">(self, visitor)</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">def</span><span class="w"> </span><span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">97</span>     <span class="n">visitor</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-<span class="nn">File /usr/local/python/3.14.2/lib/python3.14/site-packages/Sastrawi/Stemmer/Context/Visitor/AbstractDisambiguatePrefixRule.py:15,</span> in <span class="ni">AbstractDisambiguatePrefixRule.visit</span><span class="nt">(self, context)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">disambiguator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">disambiguators</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">disambiguator</span><span class="o">.</span><span class="n">disambiguate</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">current_word</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">break</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tokens_no_stopword</th>
+      <th>tokens_final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[jepang, austin, krajicek, nikola, mektic, ber...</td>
+      <td>[jepang, austin, krajicek, nikola, mektic, has...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[jorge, martin, sedang, memperjuangkan, titel,...</td>
+      <td>[jorge, martin, sedang, juang, titel, juara, d...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[rider, indonesia, veda, ega, pratama, balapan...</td>
+      <td>[rider, indonesia, veda, ega, pratama, balap, ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[pelatih, speed, panjat, tebing, fitriyani, me...</td>
+      <td>[latih, speed, panjat, tebing, fitriyani, ungk...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[pertamina, grand, prix, of, indonesia, melahi...</td>
+      <td>[pertamina, grand, prix, of, indonesia, lahir,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="pembentukan-vocabulary">
-<h2>Pembentukan Vocabulary<a class="headerlink" href="#pembentukan-vocabulary" title="Link to this heading">#</a></h2>
-<p>Setelah preprocessing selesai, seluruh kata dari tokens_final dikumpulkan dan kata yang sama hanya dihitung satu kali. Hasilnya terdapat 5.335 kata unik yang digunakan sebagai vocabulary.</p>
+<h2>Pembentukan Vocabulary<a class="headerlink" href="#pembentukan-vocabulary" title="Permalink to this heading">#</a></h2>
+<p>Setelah preprocessing selesai, seluruh kata dari tokens_final dikumpulkan dan kata yang sama hanya dihitung satu kali. Hasilnya terdapat 5.108 kata unik yang digunakan sebagai vocabulary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">semua_kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">kata</span> <span class="k">for</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">'tokens_final'</span><span class="p">]</span> <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
@@ -939,15 +789,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kata unik setelah filter: 5335
-['a', 'aaa', 'ab', 'abad', 'abadi', 'abai', 'abal', 'abang', 'abdelkarim', 'abdoul', 'abdulelah', 'abdullah', 'abel', 'abet', 'abha', 'abiel', 'absen', 'absorber', 'ac', 'academy', 'acak', 'acara', 'accelerating', 'acceptance', 'access', 'accessories', 'accident', 'accreditation', 'acd', 'aceh']
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah kata unik setelah filter: 5108
+['a', 'aadi', 'abad', 'abai', 'abal', 'abang', 'abdi', 'abdul', 'abdullah', 'abdurrahman', 'abe', 'abipraya', 'abruzzo', 'absen', 'abu', 'abuan', 'ac', 'academy', 'acara', 'acas', 'acceleration', 'accountant', 'accounting', 'accuracy', 'acd', 'aceh', 'acosta', 'action', 'acu', 'acung']
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="representasi-berita-dengan-tf-idf">
-<h2>Representasi Berita dengan TF-IDF<a class="headerlink" href="#representasi-berita-dengan-tf-idf" title="Link to this heading">#</a></h2>
+<h2>Representasi Berita dengan TF-IDF<a class="headerlink" href="#representasi-berita-dengan-tf-idf" title="Permalink to this heading">#</a></h2>
 <p>TF-IDF digunakan untuk memberikan bobot pada setiap kata berdasarkan seberapa penting kata tersebut dalam suatu berita. Pada proses ini terdapat dua perhitungan utama, yaitu TF (Term Frequency) dan IDF (Inverse Document Frequency).</p>
 <p>Term Frequency (TF):
 $<span class="math notranslate nohighlight">\(
@@ -990,7 +840,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5337)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5110)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1013,22 +863,22 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <th></th>
       <th>id</th>
       <th>a</th>
-      <th>aaa</th>
-      <th>ab</th>
+      <th>aadi</th>
       <th>abad</th>
-      <th>abadi</th>
       <th>abai</th>
       <th>abal</th>
       <th>abang</th>
-      <th>abdelkarim</th>
+      <th>abdi</th>
+      <th>abdul</th>
+      <th>abdullah</th>
       <th>...</th>
-      <th>zhegrova</th>
-      <th>zhejiang</th>
-      <th>zhestkova</th>
-      <th>zielinski</th>
-      <th>zikrak</th>
+      <th>zhang</th>
+      <th>zidane</th>
+      <th>zig</th>
       <th>zona</th>
-      <th>zubimendi</th>
+      <th>zone</th>
+      <th>zones</th>
+      <th>zoom</th>
       <th>zulhas</th>
       <th>zulkifli</th>
       <th>label</th>
@@ -1046,7 +896,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1157,7 +1007,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
     </tr>
   </tbody>
 </table>
-<p>5 rows × 5337 columns</p>
+<p>5 rows × 5110 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
@@ -1181,7 +1031,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5337)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 5110)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1204,22 +1054,22 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <th></th>
       <th>id</th>
       <th>a</th>
-      <th>aaa</th>
-      <th>ab</th>
+      <th>aadi</th>
       <th>abad</th>
-      <th>abadi</th>
       <th>abai</th>
       <th>abal</th>
       <th>abang</th>
-      <th>abdelkarim</th>
+      <th>abdi</th>
+      <th>abdul</th>
+      <th>abdullah</th>
       <th>...</th>
-      <th>zhegrova</th>
-      <th>zhejiang</th>
-      <th>zhestkova</th>
-      <th>zielinski</th>
-      <th>zikrak</th>
+      <th>zhang</th>
+      <th>zidane</th>
+      <th>zig</th>
       <th>zona</th>
-      <th>zubimendi</th>
+      <th>zone</th>
+      <th>zones</th>
+      <th>zoom</th>
       <th>zulhas</th>
       <th>zulkifli</th>
       <th>label</th>
@@ -1237,7 +1087,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.329679</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1261,7 +1111,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1285,7 +1135,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1309,7 +1159,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1333,7 +1183,7 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1348,10 +1198,10 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
     </tr>
   </tbody>
 </table>
-<p>5 rows × 5337 columns</p>
+<p>5 rows × 5110 columns</p>
 </div></div></div>
 </div>
-<p>Teks yang telah melalui preprocessing kemudian digabungkan kembali menjadi teks menggunakan tokens_final. Selanjutnya, TF-IDF digunakan untuk mengubah setiap berita menjadi representasi numerik berdasarkan bobot kepentingan setiap kata dalam dokumen. Hasil representasi menghasilkan 200 berita dengan 5.335 fitur kata.</p>
+<p>Teks yang telah melalui preprocessing kemudian digabungkan kembali menjadi teks menggunakan tokens_final. Selanjutnya, TF-IDF digunakan untuk mengubah setiap berita menjadi representasi numerik berdasarkan bobot kepentingan setiap kata dalam dokumen. Hasil representasi menghasilkan 200 berita dengan 5.108 fitur kata.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contoh_doc</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1360,22 +1210,22 @@ $<span class="math notranslate nohighlight">\(TFIDF(t,d)=TF(t,d)×IDF(t)\)</span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>haaland       0.448107
-hamza         0.412099
-abdelkarim    0.329679
-aku           0.223688
-striker       0.216710
-erling        0.192046
-aspek         0.176326
-nil           0.164840
-sungai        0.164840
-mau           0.161483
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>japan       0.358252
+krajicek    0.358252
+mektic      0.358252
+open        0.288097
+artikel     0.255477
+ganda       0.255477
+putra       0.189728
+austin      0.179126
+nikola      0.179126
+sabet       0.179126
 Name: 0, dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
-<p>Pada berita pertama, beberapa kata dengan nilai TF-IDF tertinggi adalah persib, seoul, dan bandung. Hal ini menunjukkan bahwa kata-kata tersebut memiliki bobot yang cukup tinggi pada dokumen tersebut dibandingkan kata lainnya.</p>
+<p>Pada berita pertama, beberapa kata dengan nilai TF-IDF tertinggi adalah japan, krajicek dan mektic. Hal ini menunjukkan bahwa kata-kata tersebut memiliki bobot yang cukup tinggi pada dokumen tersebut dibandingkan kata lainnya.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tfidf_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"tfidf_berita.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1392,8 +1242,8 @@ Name: 0, dtype: float64
 <p>Hasil TF-IDF kemudian disimpan dalam file tfidf_berita.csv untuk digunakan pada proses selanjutnya.</p>
 </section>
 <section id="reduksi-dimensi-dengan-pca">
-<h2>Reduksi Dimensi dengan PCA<a class="headerlink" href="#reduksi-dimensi-dengan-pca" title="Link to this heading">#</a></h2>
-<p>Data hasil TF-IDF kemudian digunakan sebagai input untuk PCA (Principal Component Analysis). Sebelum PCA, data memiliki ukuran 200 × 5.335, yaitu 200 berita dengan 5.335 fitur.</p>
+<h2>Reduksi Dimensi dengan PCA<a class="headerlink" href="#reduksi-dimensi-dengan-pca" title="Permalink to this heading">#</a></h2>
+<p>Data hasil TF-IDF kemudian digunakan sebagai input untuk PCA (Principal Component Analysis). Sebelum PCA, data memiliki ukuran 200 × 5.108, yaitu 200 berita dengan 5.108 fitur.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'label'</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>
@@ -1404,12 +1254,12 @@ Name: 0, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape sebelum PCA: (200, 5335)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape sebelum PCA: (200, 5108)
 </pre></div>
 </div>
 </div>
 </div>
-<p>PCA digunakan untuk mengurangi jumlah fitur dengan mempertahankan informasi utama dari data. Pada notebook, jumlah komponen ditentukan berdasarkan cumulative explained variance sebesar 90%. Hasilnya, dibutuhkan 142 komponen dari 5.211 dimensi awal.</p>
+<p>PCA digunakan untuk mengurangi jumlah fitur dengan mempertahankan informasi utama dari data. Pada notebook, jumlah komponen ditentukan berdasarkan cumulative explained variance sebesar 90%. Hasilnya, dibutuhkan 137 komponen dari 5.108 dimensi awal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
@@ -1427,8 +1277,8 @@ Name: 0, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah komponen untuk menjelaskan 90% variansi: 144
-Total dimensi awal: 5335
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah komponen untuk menjelaskan 90% variansi: 139
+Total dimensi awal: 5108
 </pre></div>
 </div>
 </div>
@@ -1449,7 +1299,7 @@ Total dimensi awal: 5335
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape setelah PCA: (200, 144)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape setelah PCA: (200, 139)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1481,15 +1331,15 @@ Total dimensi awal: 5335
       <th>PC8</th>
       <th>PC9</th>
       <th>...</th>
+      <th>PC131</th>
+      <th>PC132</th>
+      <th>PC133</th>
+      <th>PC134</th>
+      <th>PC135</th>
       <th>PC136</th>
       <th>PC137</th>
       <th>PC138</th>
       <th>PC139</th>
-      <th>PC140</th>
-      <th>PC141</th>
-      <th>PC142</th>
-      <th>PC143</th>
-      <th>PC144</th>
       <th>label</th>
     </tr>
   </thead>
@@ -1497,129 +1347,129 @@ Total dimensi awal: 5335
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-0.124398</td>
-      <td>-0.011089</td>
-      <td>0.033206</td>
-      <td>-0.116005</td>
-      <td>-0.113941</td>
-      <td>-0.049804</td>
-      <td>0.005374</td>
-      <td>-0.090359</td>
-      <td>-0.058659</td>
+      <td>0.016310</td>
+      <td>0.064040</td>
+      <td>-0.003596</td>
+      <td>0.058287</td>
+      <td>0.034701</td>
+      <td>-0.011416</td>
+      <td>-0.013548</td>
+      <td>-0.049478</td>
+      <td>-0.012545</td>
       <td>...</td>
-      <td>0.047614</td>
-      <td>-0.012722</td>
-      <td>0.012781</td>
-      <td>-0.099012</td>
-      <td>0.065524</td>
-      <td>-0.060036</td>
-      <td>-0.066674</td>
-      <td>-0.033010</td>
-      <td>0.002671</td>
+      <td>0.030304</td>
+      <td>0.038745</td>
+      <td>0.027398</td>
+      <td>0.023805</td>
+      <td>-0.028052</td>
+      <td>-0.003597</td>
+      <td>0.016633</td>
+      <td>0.064700</td>
+      <td>-0.006247</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>-0.137792</td>
-      <td>-0.019040</td>
-      <td>0.040569</td>
-      <td>-0.126533</td>
-      <td>-0.225090</td>
-      <td>-0.126963</td>
-      <td>0.009653</td>
-      <td>-0.004856</td>
-      <td>0.031883</td>
+      <td>0.335563</td>
+      <td>-0.048594</td>
+      <td>0.026808</td>
+      <td>0.028114</td>
+      <td>-0.140747</td>
+      <td>0.024754</td>
+      <td>-0.016208</td>
+      <td>-0.025431</td>
+      <td>0.007980</td>
       <td>...</td>
-      <td>-0.017891</td>
-      <td>0.013063</td>
-      <td>-0.083483</td>
-      <td>0.012201</td>
-      <td>0.023940</td>
-      <td>-0.036590</td>
-      <td>-0.005847</td>
-      <td>-0.017346</td>
-      <td>-0.017771</td>
+      <td>0.059164</td>
+      <td>-0.053914</td>
+      <td>-0.069388</td>
+      <td>-0.057029</td>
+      <td>0.007123</td>
+      <td>-0.054663</td>
+      <td>-0.008188</td>
+      <td>0.054430</td>
+      <td>-0.075545</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-0.182379</td>
-      <td>-0.019881</td>
-      <td>0.074463</td>
-      <td>-0.164427</td>
-      <td>-0.187093</td>
-      <td>-0.119358</td>
-      <td>-0.022457</td>
-      <td>-0.072715</td>
-      <td>-0.037258</td>
+      <td>0.163250</td>
+      <td>0.052259</td>
+      <td>-0.017724</td>
+      <td>0.060311</td>
+      <td>0.330874</td>
+      <td>-0.018232</td>
+      <td>-0.012890</td>
+      <td>-0.057679</td>
+      <td>0.031286</td>
       <td>...</td>
-      <td>0.046350</td>
-      <td>-0.006992</td>
-      <td>-0.052981</td>
-      <td>0.058430</td>
-      <td>-0.123601</td>
-      <td>0.068690</td>
-      <td>0.030695</td>
-      <td>-0.009491</td>
-      <td>-0.060337</td>
+      <td>-0.022419</td>
+      <td>0.091648</td>
+      <td>0.052644</td>
+      <td>0.042707</td>
+      <td>0.075697</td>
+      <td>-0.059457</td>
+      <td>-0.061724</td>
+      <td>0.029606</td>
+      <td>0.002340</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>0.010425</td>
-      <td>0.004844</td>
-      <td>-0.139063</td>
-      <td>0.027707</td>
-      <td>-0.112256</td>
-      <td>0.141587</td>
-      <td>0.043377</td>
-      <td>-0.136908</td>
-      <td>-0.034577</td>
+      <td>-0.009962</td>
+      <td>0.294924</td>
+      <td>0.007640</td>
+      <td>-0.004036</td>
+      <td>-0.008824</td>
+      <td>-0.019960</td>
+      <td>0.017993</td>
+      <td>0.116127</td>
+      <td>-0.044190</td>
       <td>...</td>
-      <td>-0.039797</td>
-      <td>-0.013377</td>
-      <td>-0.005045</td>
-      <td>0.027791</td>
-      <td>-0.025402</td>
-      <td>-0.051107</td>
-      <td>0.052651</td>
-      <td>0.015648</td>
-      <td>-0.019603</td>
+      <td>-0.030776</td>
+      <td>0.086397</td>
+      <td>-0.045490</td>
+      <td>-0.104737</td>
+      <td>-0.228806</td>
+      <td>-0.012939</td>
+      <td>0.017881</td>
+      <td>0.035670</td>
+      <td>-0.041894</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.026788</td>
-      <td>0.021782</td>
-      <td>-0.127564</td>
-      <td>-0.000172</td>
-      <td>-0.099953</td>
-      <td>0.118872</td>
-      <td>0.022734</td>
-      <td>-0.115752</td>
-      <td>-0.057480</td>
+      <td>0.524751</td>
+      <td>-0.076431</td>
+      <td>0.015991</td>
+      <td>-0.011711</td>
+      <td>-0.117077</td>
+      <td>-0.012359</td>
+      <td>0.005967</td>
+      <td>-0.252379</td>
+      <td>0.178608</td>
       <td>...</td>
-      <td>-0.023386</td>
-      <td>0.009931</td>
-      <td>-0.070041</td>
-      <td>-0.022650</td>
-      <td>-0.038488</td>
-      <td>-0.061121</td>
-      <td>0.030297</td>
-      <td>0.007804</td>
-      <td>-0.019574</td>
+      <td>-0.051039</td>
+      <td>-0.054479</td>
+      <td>-0.077658</td>
+      <td>-0.052478</td>
+      <td>-0.046393</td>
+      <td>0.052913</td>
+      <td>0.023458</td>
+      <td>-0.026328</td>
+      <td>0.042178</td>
       <td>sport</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 146 columns</p>
+<p>5 rows × 141 columns</p>
 </div></div></div>
 </div>
-<p>Setelah dilakukan PCA, ukuran data berubah menjadi 200 × 144. Setiap fitur hasil reduksi direpresentasikan sebagai PC1, PC2, hingga PC144.</p>
+<p>Setelah dilakukan PCA, ukuran data berubah menjadi 200 × 139. Setiap fitur hasil reduksi direpresentasikan sebagai PC1, PC2, hingga PC144.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"pca_berita.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1635,7 +1485,7 @@ Total dimensi awal: 5335
 </div>
 <p>Hasil akhir PCA kemudian disimpan dalam file pca_berita.csv.</p>
 <section id="visualisasi-pca">
-<h3>Visualisasi PCA<a class="headerlink" href="#visualisasi-pca" title="Link to this heading">#</a></h3>
+<h3>Visualisasi PCA<a class="headerlink" href="#visualisasi-pca" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1655,10 +1505,10 @@ Total dimensi awal: 5335
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0586bf4f84dbd221deef84b9d9fe713b43c08bebf53e0085e46785ee2a99d322.png" src="_images/0586bf4f84dbd221deef84b9d9fe713b43c08bebf53e0085e46785ee2a99d322.png" />
+<img alt="_images/3bdccb78cbe5b9e47bb3413b2b8a1515ed590b5f369faae2ba44c16b3fed337b.png" src="_images/3bdccb78cbe5b9e47bb3413b2b8a1515ed590b5f369faae2ba44c16b3fed337b.png" />
 </div>
 </div>
-<p>Hasil menunjukkan penyebaran berita sport dan finance berdasarkan PC1 dan PC2. Titik hijau adalah berita sport, sedangkan titik oranye adalah finance. Terlihat berita sport lebih banyak di sebelah kiri, sementara finance lebih banyak di sebelah kanan. Artinya, kedua kategori berita memiliki pola yang cukup berbeda setelah direduksi dengan PCA.</p>
+<p>Grafik menunjukkan bahwa berita sport dan finance memiliki pola teks yang berbeda. Berita finance cenderung berkumpul di satu area, sedangkan berita sport lebih menyebar. Artinya, isi atau karakteristik kata yang digunakan pada kedua kategori berita cukup berbeda.</p>
 </section>
 </section>
 </section>
@@ -1699,7 +1549,7 @@ Total dimensi awal: 5335
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Crawling Data</p>
+        <p class="prev-next-title">Crawling dan Scraping Data</p>
       </div>
     </a>
     <a class="right-next"
@@ -1718,17 +1568,15 @@ Total dimensi awal: 5335
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-library-nltk">Install Library NLTK</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembentukan-vocabulary">Pembentukan Vocabulary</a></li>
@@ -1761,7 +1609,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1785,8 +1633,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="./" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes &#8212; My sample book</title>
   
@@ -16,82 +17,86 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
   
-  <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'skip_gram';</script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Representasi TF-IDF dan Reduksi Dimensi Data Berita" href="tf-idf%20dan%20reduksi%20dimensi%20data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-  
-    
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="searchindex.js"></script>
-  
   </head>
-  <body data-default-mode="">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  
-  <dialog id="pst-search-dialog">
-    
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,6 +104,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -106,59 +112,15 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -167,8 +129,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -198,18 +159,11 @@
     
     
     <img src="_static/profil.jpeg" class="logo__image only-light" alt="My sample book - Home"/>
-    <img src="_static/profil.jpeg" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/profil.jpeg" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -222,7 +176,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar%20Web%20Mining.html">Pengantar Web Mining</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="Scraping%20dan%20crawling.html">Crawling Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Scraping%20dan%20crawling.html">Crawling dan Scraping Data</a></li>
+
 
 
 <li class="toctree-l1"><a class="reference internal" href="tf-idf%20dan%20reduksi%20dimensi%20data.html">Representasi TF-IDF dan Reduksi Dimensi Data Berita</a></li>
@@ -235,14 +190,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -261,9 +211,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -372,7 +322,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  class="btn btn-sm btn-fullscreen-button"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -386,19 +336,27 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -418,7 +376,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="pst-show_toc_level nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-membaca-dataset">1. Import Library dan Membaca Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyiapkan-stopword-dan-stemming">2. Menyiapkan Stopword dan Stemming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-teks">3. Preprocessing Teks</a></li>
@@ -444,9 +402,9 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="skip-gram-untuk-klasifikasi-data-berita-menggunakan-naive-bayes">
-<h1>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes<a class="headerlink" href="#skip-gram-untuk-klasifikasi-data-berita-menggunakan-naive-bayes" title="Link to this heading">#</a></h1>
+<h1>Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes<a class="headerlink" href="#skip-gram-untuk-klasifikasi-data-berita-menggunakan-naive-bayes" title="Permalink to this heading">#</a></h1>
 <section id="import-library-dan-membaca-dataset">
-<h2>1. Import Library dan Membaca Dataset<a class="headerlink" href="#import-library-dan-membaca-dataset" title="Link to this heading">#</a></h2>
+<h2>1. Import Library dan Membaca Dataset<a class="headerlink" href="#import-library-dan-membaca-dataset" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini dilakukan import library yang diperlukan untuk proses pengolahan teks, pembuatan word embedding menggunakan Word2Vec Skip-gram, klasifikasi menggunakan Naive Bayes, serta evaluasi model.</p>
 <p>Dataset berita kemudian dibaca menggunakan pandas. Dataset terdiri dari 200 data dengan tiga kolom, yaitu id, isi_berita, dan label.</p>
 <div class="cell docutils container">
@@ -470,26 +428,104 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">emoji</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> 
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Word2Vec</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="ne">ModuleNotFoundError</span>: No module named 'gensim'
-</pre></div>
-</div>
-</div>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Jepang - Austin Krajicek-Nikola Mektic berhasi...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Jorge Martin sedang memperjuangkan titel juara...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Rider Indonesia Veda Ega Pratama balapan di Ma...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Pelatih speed tim panjat tebing, Fitriyani, me...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Pertamina Grand Prix of Indonesia 2026 sudah m...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>196</td>
+      <td>Otoritas Jasa Keuangan (OJK) menjatuhkan sanks...</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>197</td>
+      <td>Kepala Badan Gizi Nasional (BGN) Sudaryono men...</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>198</td>
+      <td>Utang pinjaman daring (pindar) masyarakat Indo...</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>199</td>
+      <td>Jumlah investor pasar modal Indonesia terus be...</td>
+      <td>finance</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>200</td>
+      <td>Menteri Koordinator (Menko) Perekonomian Airla...</td>
+      <td>finance</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 3 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="menyiapkan-stopword-dan-stemming">
-<h2>2. Menyiapkan Stopword dan Stemming<a class="headerlink" href="#menyiapkan-stopword-dan-stemming" title="Link to this heading">#</a></h2>
+<h2>2. Menyiapkan Stopword dan Stemming<a class="headerlink" href="#menyiapkan-stopword-dan-stemming" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini digunakan library Sastrawi untuk melakukan preprocessing teks Bahasa Indonesia.</p>
 <p>Stopword digunakan untuk menghapus kata-kata umum yang kurang memberikan informasi penting dalam proses klasifikasi. Sedangkan stemming digunakan untuk mengubah kata menjadi bentuk dasarnya.</p>
 <p>Hasil dari tahap ini akan digunakan pada proses preprocessing berita.</p>
@@ -511,7 +547,7 @@
 </div>
 </section>
 <section id="preprocessing-teks">
-<h2>3. Preprocessing Teks<a class="headerlink" href="#preprocessing-teks" title="Link to this heading">#</a></h2>
+<h2>3. Preprocessing Teks<a class="headerlink" href="#preprocessing-teks" title="Permalink to this heading">#</a></h2>
 <p>Tahap preprocessing dilakukan untuk membersihkan dan mempersiapkan teks sebelum digunakan dalam proses Word2Vec.</p>
 <p>Tahapan yang dilakukan meliputi:</p>
 <ol class="arabic simple">
@@ -558,21 +594,93 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Berita 1:
-['hamza', 'abdelkarim', 'kagum', 'erling', 'haaland', 'striker', 'muda', 'barcelona', 'mau', 'jadi', 'haaland', 'sungai', 'nil', 'hamza', 'abdelkarim', 'striker', 'muda', 'barcelona', 'asal', 'mesir', 'usia', 'tahun', 'musim', 'hamza', 'masuk', 'skuad', 'utama', 'barca', 'belum', 'main', 'tim', 'akademi', 'musim', 'lalu', 'baca', 'thierry', 'henry', 'suka', 'erling', 'haaland', 'hamza', 'abdelkarim', 'kagum', 'erling', 'haaland', 'bagi', 'haaland', 'striker', 'top', 'haaland', 'serang', 'hebat', 'luar', 'biasa', 'cetak', 'gol', 'selalu', 'ada', 'posisi', 'tepat', 'laku', 'buka', 'lansir', 'tribuna', 'selalu', 'ajar', 'main', 'hebat', 'amat', 'cara', 'main', 'aku', 'senang', 'juluk', 'haaland', 'sungai', 'nil', 'tegas', 'hamza', 'abdelkarim', 'mau', 'ajar', 'banyak', 'diri', 'mau', 'baik', 'beberapa', 'aspek', 'beri', 'percaya', 'lebih', 'latih', 'hansi', 'flick', 'aku', 'mau', 'cetak', 'banyak', 'gol', 'tang', 'trofi', 'halhal', 'perlu', 'aku', 'baik', 'aspekaspek', 'mana', 'aku', 'kembang', 'gaya', 'main', 'barcelona', 'beda', 'tim', 'mana', 'aku', 'sedang', 'proses', 'adaptasi', 'tutup', 'affpur']
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">21</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="c1"># 6. Stemming</span>
+<span class="ne">---&gt; </span><span class="mi">21</span>     <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">token_preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kata</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1"># Menampilkan hasil preprocessing 3 berita pertama</span>
 
-Berita 2:
-['kontrak', 'luke', 'shaw', 'manchester', 'united', 'habis', 'akhir', 'musim', 'tiada', 'tandatanda', 'kontrak', 'panjang', 'kontrak', 'luke', 'shaw', 'habis', 'juni', 'shaw', 'kuat', 'manchester', 'united', 'sejak', 'tahun', 'baca', 'bintang', 'muda', 'jj', 'gabriel', 'mau', 'tinggal', 'mu', 'lansir', 'mirror', 'manchester', 'united', 'yakin', 'panjang', 'kontrak', 'luke', 'shaw', 'mu', 'renovasi', 'besarbesaran', 'lini', 'belakang', 'bursa', 'transfer', 'musim', 'panas', 'beli', 'bekbek', 'baru', 'shaw', 'dulu', 'beli', 'mu', 'southampton', 'shaw', 'tebus', 'harga', 'juta', 'euro', 'hitung', 'angka', 'besar', 'baca', 'start', 'mu', 'era', 'carrick', 'amorim', 'sama', 'nih', 'luke', 'shaw', 'total', 'emas', 'tampil', 'buat', 'manchester', 'united', 'seluruh', 'kompetisi', 'empat', 'titel', 'raih', 'titel', 'liga', 'europa', 'piala', 'fa', 'menang', 'kali', 'carabao', 'cup', 'shaw', 'lebih', 'banyak', 'ganggu', 'cedera', 'cedera', 'otot', 'hantu', 'pernah', 'alami', 'patah', 'tulang', 'tibia', 'fibula', 'kaki', 'kanan', 'absen', 'lama', 'laga', 'main', 'usia', 'tahun', 'jadi', 'percaya', 'latih', 'michael', 'carrick', 'faktor', 'bugar', 'selalu', 'jadi', 'batu', 'sandungan', 'affyna']
+<span class="nn">Cell In[3], line 21,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="c1"># 6. Stemming</span>
+<span class="ne">---&gt; </span><span class="mi">21</span>     <span class="n">kata</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kata</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">token_preprocessing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kata</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1"># Menampilkan hasil preprocessing 3 berita pertama</span>
 
-Berita 3:
-['erling', 'haaland', 'main', 'bagus', 'manchester', 'city', 'timnas', 'norwegia', 'musim', 'lalu', 'main', 'usia', 'tahun', 'sebut', 'pantas', 'raih', 'ballon', 'dor', 'sama', 'man', 'city', 'musim', 'lalu', 'haaland', 'tampil', 'produktif', 'mampu', 'sumbang', 'gol', 'sembilan', 'assist', 'tanding', 'kontribusi', 'haaland', 'mampu', 'tang', 'piala', 'liga', 'inggris', 'piala', 'fa', 'sama', 'man', 'city', 'catat', 'jelas', 'cukup', 'oke', 'mantan', 'main', 'borussia', 'dortmund', 'baca', 'haaland', 'buat', 'apa', 'seringsering', 'pegang', 'bola', 'sama', 'norwegia', 'haaland', 'mampu', 'tembus', 'empat', 'final', 'piala', 'dunia', 'haaland', 'emas', 'tujuh', 'gol', 'semua', 'modal', 'haaland', 'yakin', 'mantan', 'main', 'norwegia', 'jan', 'age', 'fjortoft', 'layak', 'tang', 'ballon', 'dor', 'kalian', 'bilang', 'subjektif', 'orang', 'norwegia', 'jelas', 'erling', 'haaland', 'menang', 'ballon', 'dor', 'kata', 'jan', 'age', 'fjortoft', 'kutip', 'sportskeeda', 'trofi', 'inggris', 'musim', 'lalu', 'gol', 'klub', 'negara', 'jadi', 'bintang', 'global', 'piala', 'dunia', 'pegang', 'peran', 'besar', 'jalan', 'norwegia', 'hingga', 'babak', 'empat', 'final', 'kata', 'tambah', 'caspur']
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\CachedStemmer.py:20,</span> in <span class="ni">CachedStemmer.stem</span><span class="nt">(self, text)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">20</span>     <span class="n">stem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delegatedStemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">stem</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stem</span><span class="p">)</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Stemmer.py:27,</span> in <span class="ni">Stemmer.stem</span><span class="nt">(self, text)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">stems</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="n">stems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stem_word</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">return</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stems</span><span class="p">)</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Stemmer.py:36,</span> in <span class="ni">Stemmer.stem_word</span><span class="nt">(self, word)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_plural_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">36</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stem_singular_word</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Stemmer.py:84,</span> in <span class="ni">Stemmer.stem_singular_word</span><span class="nt">(self, word)</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span><span class="w"> </span><span class="sd">"""Stem a singular word to its common stem form."""</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span> <span class="n">context</span> <span class="o">=</span> <span class="n">Context</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">visitor_provider</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">84</span> <span class="n">context</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span> <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">result</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:37,</span> in <span class="ni">Context.execute</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="w"> </span><span class="sd">"""Execute stemming process; the result can be retrieved with result"""</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="c1">#step 1 - 5</span>
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_stemming_process</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1">#step 6</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:80,</span> in <span class="ni">Context.start_stemming_process</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="k">return</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span> <span class="c1">#step 4, 5</span>
+<span class="ne">---&gt; </span><span class="mi">80</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_prefixes</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>     <span class="k">return</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:89,</span> in <span class="ni">Context.remove_prefixes</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="k">def</span><span class="w"> </span><span class="nf">remove_prefixes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">89</span>         <span class="bp">self</span><span class="o">.</span><span class="n">accept_prefix_visitors</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix_pisitors</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="k">return</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:110,</span> in <span class="ni">Context.accept_prefix_visitors</span><span class="nt">(self, visitors)</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">removalCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">removals</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">for</span> <span class="n">visitor</span> <span class="ow">in</span> <span class="n">visitors</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">visitor</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:97,</span> in <span class="ni">Context.accept</span><span class="nt">(self, visitor)</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">def</span><span class="w"> </span><span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">97</span>     <span class="n">visitor</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Visitor\AbstractDisambiguatePrefixRule.py:15,</span> in <span class="ni">AbstractDisambiguatePrefixRule.visit</span><span class="nt">(self, context)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">disambiguator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">disambiguators</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">disambiguator</span><span class="o">.</span><span class="n">disambiguate</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">current_word</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">break</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="membuat-pasangan-target-dan-konteks">
-<h2>4. Membuat Pasangan Target dan Konteks<a class="headerlink" href="#membuat-pasangan-target-dan-konteks" title="Link to this heading">#</a></h2>
+<h2>4. Membuat Pasangan Target dan Konteks<a class="headerlink" href="#membuat-pasangan-target-dan-konteks" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini dibuat pasangan kata target dan kata konteks sebagai bagian dari proses Skip-gram.</p>
 <p>Parameter window = 1 digunakan sehingga setiap kata akan melihat satu kata di sebelah kiri dan satu kata di sebelah kanan sebagai konteks.</p>
 <p>Hasilnya berupa tabel yang memiliki dua kolom, yaitu Target dan Konteks.</p>
@@ -633,28 +741,28 @@ Berita 3:
   <tbody>
     <tr>
       <th>0</th>
-      <td>hamza</td>
-      <td>abdelkarim</td>
+      <td>jepang</td>
+      <td>austin</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>abdelkarim</td>
-      <td>hamza</td>
+      <td>austin</td>
+      <td>jepang</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>abdelkarim</td>
-      <td>kagum</td>
+      <td>austin</td>
+      <td>krajiceknikola</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>kagum</td>
-      <td>abdelkarim</td>
+      <td>krajiceknikola</td>
+      <td>austin</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kagum</td>
-      <td>erling</td>
+      <td>krajiceknikola</td>
+      <td>mektic</td>
     </tr>
     <tr>
       <th>...</th>
@@ -662,50 +770,50 @@ Berita 3:
       <td>...</td>
     </tr>
     <tr>
-      <th>90169</th>
-      <td>penuh</td>
-      <td>masyarakat</td>
+      <th>94353</th>
+      <td>lindung</td>
+      <td>buat</td>
     </tr>
     <tr>
-      <th>90170</th>
-      <td>penuh</td>
-      <td>wajib</td>
+      <th>94354</th>
+      <td>lindung</td>
+      <td>rakyat</td>
     </tr>
     <tr>
-      <th>90171</th>
-      <td>wajib</td>
-      <td>penuh</td>
+      <th>94355</th>
+      <td>rakyat</td>
+      <td>lindung</td>
     </tr>
     <tr>
-      <th>90172</th>
-      <td>wajib</td>
-      <td>hnuega</td>
+      <th>94356</th>
+      <td>rakyat</td>
+      <td>halhns</td>
     </tr>
     <tr>
-      <th>90173</th>
-      <td>hnuega</td>
-      <td>wajib</td>
+      <th>94357</th>
+      <td>halhns</td>
+      <td>rakyat</td>
     </tr>
   </tbody>
 </table>
-<p>90174 rows × 2 columns</p>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah pasangan target-konteks: 90174
+<p>94358 rows × 2 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah pasangan target-konteks: 94358
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="membuat-model-word2vec-dengan-skip-gram">
-<h2>5. Membuat Model Word2Vec dengan Skip-gram<a class="headerlink" href="#membuat-model-word2vec-dengan-skip-gram" title="Link to this heading">#</a></h2>
+<h2>5. Membuat Model Word2Vec dengan Skip-gram<a class="headerlink" href="#membuat-model-word2vec-dengan-skip-gram" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini dibuat model Word2Vec menggunakan metode Skip-gram.</p>
-<p>Parameter sg=1 menunjukkan bahwa Word2Vec menggunakan metode Skip-gram. Setiap kata akan direpresentasikan dalam bentuk vektor berdimensi 3 karena menggunakan vector_size=3.</p>
+<p>Parameter sg=1 menunjukkan bahwa Word2Vec menggunakan metode Skip-gram. Setiap kata akan direpresentasikan dalam bentuk vektor berdimensi 100 karena menggunakan vector_size=100.</p>
 <p>Parameter window=2 digunakan untuk menentukan jumlah kata di sekitar kata target yang digunakan sebagai konteks. Kata yang muncul kurang dari 2 kali tidak dimasukkan ke dalam vocabulary karena menggunakan min_count=2.</p>
 <p>Model dilatih selama 50 epoch.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span>
     <span class="n">sentences</span><span class="o">=</span><span class="n">token_preprocessing</span><span class="p">,</span>
-    <span class="n">vector_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">vector_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
     <span class="n">window</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">min_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
     <span class="n">sg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -720,14 +828,14 @@ Berita 3:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Skip-gram berhasil dibuat
-Jumlah kata dalam vocabulary: 3315
+Jumlah kata dalam vocabulary: 3307
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="menampilkan-word-embedding">
-<h2>6. Menampilkan Word Embedding<a class="headerlink" href="#menampilkan-word-embedding" title="Link to this heading">#</a></h2>
+<h2>6. Menampilkan Word Embedding<a class="headerlink" href="#menampilkan-word-embedding" title="Permalink to this heading">#</a></h2>
 <p>Setelah model Skip-gram selesai dilatih, setiap kata dalam vocabulary memiliki representasi berupa vektor.</p>
 <p>Karena vector_size=3, setiap kata memiliki tiga nilai vektor, yaitu Vektor 1, Vektor 2, dan Vektor 3.</p>
 <p>Hasil word embedding kemudian ditampilkan dalam bentuk DataFrame agar lebih mudah dilihat dan dianalisis.</p>
@@ -736,7 +844,6 @@ Jumlah kata dalam vocabulary: 3315
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_vektor</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">kata</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="o">.</span><span class="n">index_to_key</span><span class="p">:</span>
-
     <span class="n">vektor</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">wv</span><span class="p">[</span><span class="n">kata</span><span class="p">]</span>
 
     <span class="n">data_vektor</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -745,12 +852,7 @@ Jumlah kata dalam vocabulary: 3315
 
 <span class="n">df_vektor</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
     <span class="n">data_vektor</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">"Kata"</span><span class="p">,</span>
-        <span class="s2">"Vektor 1"</span><span class="p">,</span>
-        <span class="s2">"Vektor 2"</span><span class="p">,</span>
-        <span class="s2">"Vektor 3"</span>
-    <span class="p">]</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Kata"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"Vektor </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)]</span>
 <span class="p">)</span>
 
 <span class="n">df_vektor</span>
@@ -780,43 +882,145 @@ Jumlah kata dalam vocabulary: 3315
       <th>Vektor 1</th>
       <th>Vektor 2</th>
       <th>Vektor 3</th>
+      <th>Vektor 4</th>
+      <th>Vektor 5</th>
+      <th>Vektor 6</th>
+      <th>Vektor 7</th>
+      <th>Vektor 8</th>
+      <th>Vektor 9</th>
+      <th>...</th>
+      <th>Vektor 91</th>
+      <th>Vektor 92</th>
+      <th>Vektor 93</th>
+      <th>Vektor 94</th>
+      <th>Vektor 95</th>
+      <th>Vektor 96</th>
+      <th>Vektor 97</th>
+      <th>Vektor 98</th>
+      <th>Vektor 99</th>
+      <th>Vektor 100</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>jadi</td>
-      <td>-0.777469</td>
-      <td>0.242221</td>
-      <td>0.891298</td>
+      <td>-0.321721</td>
+      <td>-0.495506</td>
+      <td>0.005316</td>
+      <td>0.154083</td>
+      <td>-0.215304</td>
+      <td>-0.359391</td>
+      <td>-0.000200</td>
+      <td>0.095453</td>
+      <td>-0.483400</td>
+      <td>...</td>
+      <td>0.411816</td>
+      <td>0.092040</td>
+      <td>0.108557</td>
+      <td>-0.255728</td>
+      <td>1.112196</td>
+      <td>-0.088175</td>
+      <td>-0.125070</td>
+      <td>-0.164197</td>
+      <td>0.080619</td>
+      <td>1.012470</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>sebut</td>
-      <td>-0.555737</td>
-      <td>0.773251</td>
-      <td>0.988701</td>
+      <td>indonesia</td>
+      <td>-0.610500</td>
+      <td>0.040997</td>
+      <td>-0.444014</td>
+      <td>0.543343</td>
+      <td>0.252091</td>
+      <td>0.152015</td>
+      <td>-0.610111</td>
+      <td>0.311128</td>
+      <td>-0.420920</td>
+      <td>...</td>
+      <td>-0.116455</td>
+      <td>0.070283</td>
+      <td>0.090875</td>
+      <td>-0.122408</td>
+      <td>-0.409209</td>
+      <td>0.015673</td>
+      <td>-0.093643</td>
+      <td>-0.324912</td>
+      <td>-0.635021</td>
+      <td>0.406816</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>main</td>
-      <td>-1.384262</td>
-      <td>-0.598625</td>
-      <td>1.151997</td>
+      <td>sebut</td>
+      <td>-0.636993</td>
+      <td>0.523565</td>
+      <td>-0.425918</td>
+      <td>0.013591</td>
+      <td>0.162274</td>
+      <td>-0.151729</td>
+      <td>-0.073245</td>
+      <td>0.350768</td>
+      <td>-0.787422</td>
+      <td>...</td>
+      <td>-0.139038</td>
+      <td>0.565143</td>
+      <td>0.264134</td>
+      <td>-0.730172</td>
+      <td>0.801717</td>
+      <td>-0.025992</td>
+      <td>-0.026070</td>
+      <td>0.140442</td>
+      <td>0.795464</td>
+      <td>-0.531981</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta</td>
-      <td>0.800397</td>
-      <td>0.558971</td>
-      <td>2.051014</td>
+      <td>rp</td>
+      <td>-1.043547</td>
+      <td>0.654706</td>
+      <td>-0.201108</td>
+      <td>0.116747</td>
+      <td>-0.259023</td>
+      <td>-1.061798</td>
+      <td>-0.379345</td>
+      <td>1.691018</td>
+      <td>0.044331</td>
+      <td>...</td>
+      <td>0.016150</td>
+      <td>-0.348333</td>
+      <td>0.210792</td>
+      <td>-0.241467</td>
+      <td>1.481639</td>
+      <td>0.580530</td>
+      <td>0.847677</td>
+      <td>0.068470</td>
+      <td>0.747015</td>
+      <td>-0.520548</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>indonesia</td>
-      <td>-0.756116</td>
-      <td>0.512971</td>
-      <td>0.851650</td>
+      <td>jakarta</td>
+      <td>-0.412345</td>
+      <td>-0.344053</td>
+      <td>-1.109796</td>
+      <td>0.397825</td>
+      <td>0.149076</td>
+      <td>0.624740</td>
+      <td>-0.101470</td>
+      <td>1.174752</td>
+      <td>0.106653</td>
+      <td>...</td>
+      <td>0.690720</td>
+      <td>-0.186534</td>
+      <td>0.065944</td>
+      <td>0.298157</td>
+      <td>-0.335846</td>
+      <td>-0.911801</td>
+      <td>0.977459</td>
+      <td>-0.111232</td>
+      <td>0.853932</td>
+      <td>-0.374321</td>
     </tr>
     <tr>
       <th>...</th>
@@ -824,50 +1028,152 @@ Jumlah kata dalam vocabulary: 3315
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>3310</th>
-      <td>amat</td>
-      <td>-0.960412</td>
-      <td>-0.234423</td>
-      <td>0.947376</td>
+      <th>3302</th>
+      <td>stoner</td>
+      <td>-0.099441</td>
+      <td>0.019502</td>
+      <td>-0.194018</td>
+      <td>-0.418644</td>
+      <td>0.210593</td>
+      <td>-0.197917</td>
+      <td>0.150410</td>
+      <td>0.456504</td>
+      <td>0.190453</td>
+      <td>...</td>
+      <td>0.249292</td>
+      <td>0.036416</td>
+      <td>-0.132104</td>
+      <td>0.242453</td>
+      <td>-0.055191</td>
+      <td>-0.155482</td>
+      <td>-0.258051</td>
+      <td>0.182623</td>
+      <td>-0.304329</td>
+      <td>0.180752</td>
     </tr>
     <tr>
-      <th>3311</th>
-      <td>tribuna</td>
-      <td>-0.720344</td>
-      <td>-0.275172</td>
-      <td>1.158699</td>
+      <th>3303</th>
+      <td>duke</td>
+      <td>-0.134562</td>
+      <td>0.188502</td>
+      <td>0.067847</td>
+      <td>-0.176831</td>
+      <td>0.301693</td>
+      <td>-0.187733</td>
+      <td>0.107952</td>
+      <td>0.319540</td>
+      <td>0.228708</td>
+      <td>...</td>
+      <td>0.291012</td>
+      <td>0.074862</td>
+      <td>-0.062662</td>
+      <td>0.188101</td>
+      <td>-0.119242</td>
+      <td>-0.151231</td>
+      <td>-0.303357</td>
+      <td>0.348368</td>
+      <td>-0.306168</td>
+      <td>0.315235</td>
     </tr>
     <tr>
-      <th>3312</th>
-      <td>akademi</td>
-      <td>-0.405817</td>
-      <td>-0.098585</td>
-      <td>1.049591</td>
+      <th>3304</th>
+      <td>geoff</td>
+      <td>-0.213074</td>
+      <td>0.142670</td>
+      <td>0.155326</td>
+      <td>-0.181950</td>
+      <td>0.324638</td>
+      <td>-0.235681</td>
+      <td>0.069948</td>
+      <td>0.283074</td>
+      <td>0.234685</td>
+      <td>...</td>
+      <td>0.292643</td>
+      <td>0.100356</td>
+      <td>-0.038979</td>
+      <td>0.082172</td>
+      <td>-0.023628</td>
+      <td>-0.092465</td>
+      <td>-0.337139</td>
+      <td>0.293040</td>
+      <td>-0.231378</td>
+      <td>0.277332</td>
     </tr>
     <tr>
-      <th>3313</th>
-      <td>nil</td>
-      <td>-1.078008</td>
-      <td>-0.326184</td>
-      <td>0.838722</td>
+      <th>3305</th>
+      <td>tunduk</td>
+      <td>-0.049472</td>
+      <td>-0.200916</td>
+      <td>-0.439609</td>
+      <td>-0.079894</td>
+      <td>-0.029516</td>
+      <td>-0.162341</td>
+      <td>-0.272426</td>
+      <td>0.080906</td>
+      <td>0.063743</td>
+      <td>...</td>
+      <td>0.056807</td>
+      <td>-0.060137</td>
+      <td>-0.336515</td>
+      <td>-0.254955</td>
+      <td>-0.002493</td>
+      <td>-0.108355</td>
+      <td>-0.349540</td>
+      <td>0.045202</td>
+      <td>-0.024895</td>
+      <td>0.069452</td>
     </tr>
     <tr>
-      <th>3314</th>
-      <td>sungai</td>
-      <td>-1.141644</td>
-      <td>-0.445751</td>
-      <td>0.905581</td>
+      <th>3306</th>
+      <td>japan</td>
+      <td>-0.002482</td>
+      <td>-0.012359</td>
+      <td>-0.198915</td>
+      <td>0.241987</td>
+      <td>0.001248</td>
+      <td>-0.272832</td>
+      <td>-0.582046</td>
+      <td>0.018741</td>
+      <td>0.077857</td>
+      <td>...</td>
+      <td>0.297910</td>
+      <td>-0.139474</td>
+      <td>0.010770</td>
+      <td>-0.126206</td>
+      <td>-0.070540</td>
+      <td>0.039029</td>
+      <td>-0.006421</td>
+      <td>0.221397</td>
+      <td>0.063511</td>
+      <td>0.239868</td>
     </tr>
   </tbody>
 </table>
-<p>3315 rows × 4 columns</p>
+<p>3307 rows × 101 columns</p>
 </div></div></div>
 </div>
 </section>
 <section id="menyimpan-hasil-word-embedding">
-<h2>7. Menyimpan Hasil Word Embedding<a class="headerlink" href="#menyimpan-hasil-word-embedding" title="Link to this heading">#</a></h2>
+<h2>7. Menyimpan Hasil Word Embedding<a class="headerlink" href="#menyimpan-hasil-word-embedding" title="Permalink to this heading">#</a></h2>
 <p>Hasil word embedding disimpan dalam format CSV dengan nama hasil_skipgram.csv.</p>
 <p>File ini berisi kata-kata yang terdapat dalam vocabulary beserta nilai vektornya.</p>
 <div class="cell docutils container">
@@ -889,7 +1195,7 @@ Jumlah kata dalam vocabulary: 3315
 </div>
 </section>
 <section id="membuat-vektor-setiap-berita">
-<h2>8. Membuat Vektor Setiap Berita<a class="headerlink" href="#membuat-vektor-setiap-berita" title="Link to this heading">#</a></h2>
+<h2>8. Membuat Vektor Setiap Berita<a class="headerlink" href="#membuat-vektor-setiap-berita" title="Permalink to this heading">#</a></h2>
 <p>Word2Vec menghasilkan vektor untuk setiap kata, sedangkan proses klasifikasi membutuhkan representasi untuk setiap berita.</p>
 <p>Oleh karena itu, dibuat fungsi buat_vektor_berita() untuk mengubah kumpulan vektor kata dalam satu berita menjadi satu vektor berita.</p>
 <p>Vektor berita diperoleh dengan menghitung nilai rata-rata dari seluruh vektor kata yang terdapat dalam berita.</p>
@@ -915,7 +1221,7 @@ Jumlah kata dalam vocabulary: 3315
 </div>
 </section>
 <section id="membentuk-vektor-untuk-seluruh-berita">
-<h2>9. Membentuk Vektor untuk Seluruh Berita<a class="headerlink" href="#membentuk-vektor-untuk-seluruh-berita" title="Link to this heading">#</a></h2>
+<h2>9. Membentuk Vektor untuk Seluruh Berita<a class="headerlink" href="#membentuk-vektor-untuk-seluruh-berita" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini fungsi buat_vektor_berita() diterapkan pada seluruh berita dalam dataset.</p>
 <p>Hasilnya disimpan dalam variabel X. Setiap baris mewakili satu berita, sedangkan setiap kolom mewakili dimensi dari vektor berita.</p>
 <p>Dengan 200 berita dan vector_size=3, ukuran data yang dihasilkan adalah 200 × 3.</p>
@@ -936,7 +1242,7 @@ Jumlah kata dalam vocabulary: 3315
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran data: (200, 3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran data: (200, 100)
 </pre></div>
 </div>
 </div>
@@ -1007,6 +1313,22 @@ Jumlah kata dalam vocabulary: 3315
       <th>Vektor 1</th>
       <th>Vektor 2</th>
       <th>Vektor 3</th>
+      <th>Vektor 4</th>
+      <th>Vektor 5</th>
+      <th>Vektor 6</th>
+      <th>Vektor 7</th>
+      <th>Vektor 8</th>
+      <th>Vektor 9</th>
+      <th>...</th>
+      <th>Vektor 92</th>
+      <th>Vektor 93</th>
+      <th>Vektor 94</th>
+      <th>Vektor 95</th>
+      <th>Vektor 96</th>
+      <th>Vektor 97</th>
+      <th>Vektor 98</th>
+      <th>Vektor 99</th>
+      <th>Vektor 100</th>
       <th>label</th>
     </tr>
   </thead>
@@ -1014,41 +1336,121 @@ Jumlah kata dalam vocabulary: 3315
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>-1.177703</td>
-      <td>-0.217879</td>
-      <td>1.112942</td>
+      <td>0.118057</td>
+      <td>-0.207871</td>
+      <td>-0.211587</td>
+      <td>0.179372</td>
+      <td>-0.036184</td>
+      <td>-0.248852</td>
+      <td>-0.413175</td>
+      <td>0.095686</td>
+      <td>0.088673</td>
+      <td>...</td>
+      <td>-0.048943</td>
+      <td>-0.141814</td>
+      <td>-0.057741</td>
+      <td>0.170496</td>
+      <td>-0.084158</td>
+      <td>-0.151851</td>
+      <td>0.088867</td>
+      <td>0.042703</td>
+      <td>0.231436</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>-1.445550</td>
-      <td>-0.308368</td>
-      <td>1.176569</td>
+      <td>-0.145816</td>
+      <td>-0.267674</td>
+      <td>-0.060074</td>
+      <td>-0.075820</td>
+      <td>-0.144901</td>
+      <td>-0.215788</td>
+      <td>-0.081281</td>
+      <td>0.274334</td>
+      <td>-0.180064</td>
+      <td>...</td>
+      <td>-0.015795</td>
+      <td>-0.265168</td>
+      <td>-0.058971</td>
+      <td>0.303861</td>
+      <td>0.202962</td>
+      <td>-0.390869</td>
+      <td>0.053398</td>
+      <td>-0.048245</td>
+      <td>0.173709</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>-1.488967</td>
-      <td>-0.377753</td>
-      <td>1.194824</td>
+      <td>-0.097634</td>
+      <td>-0.132962</td>
+      <td>-0.251747</td>
+      <td>0.048111</td>
+      <td>-0.084261</td>
+      <td>-0.191775</td>
+      <td>-0.217896</td>
+      <td>0.252177</td>
+      <td>0.010825</td>
+      <td>...</td>
+      <td>0.028998</td>
+      <td>-0.259248</td>
+      <td>-0.033430</td>
+      <td>0.241145</td>
+      <td>0.060028</td>
+      <td>-0.161840</td>
+      <td>0.014921</td>
+      <td>-0.066134</td>
+      <td>0.129118</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>-0.771093</td>
-      <td>0.472988</td>
-      <td>1.130897</td>
+      <td>-0.170762</td>
+      <td>-0.042089</td>
+      <td>-0.029145</td>
+      <td>0.160867</td>
+      <td>-0.120597</td>
+      <td>-0.285619</td>
+      <td>-0.285229</td>
+      <td>0.168948</td>
+      <td>-0.308911</td>
+      <td>...</td>
+      <td>-0.112626</td>
+      <td>-0.285452</td>
+      <td>-0.101703</td>
+      <td>0.332969</td>
+      <td>0.206307</td>
+      <td>-0.120306</td>
+      <td>0.120604</td>
+      <td>0.159882</td>
+      <td>0.095685</td>
       <td>sport</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>-0.900863</td>
-      <td>0.436432</td>
-      <td>1.028400</td>
+      <td>-0.094652</td>
+      <td>-0.131901</td>
+      <td>-0.180738</td>
+      <td>-0.091261</td>
+      <td>-0.287079</td>
+      <td>-0.051346</td>
+      <td>0.001293</td>
+      <td>0.229393</td>
+      <td>-0.106146</td>
+      <td>...</td>
+      <td>0.096999</td>
+      <td>-0.301318</td>
+      <td>0.166585</td>
+      <td>0.237099</td>
+      <td>0.160558</td>
+      <td>-0.586087</td>
+      <td>0.185464</td>
+      <td>-0.091586</td>
+      <td>0.055896</td>
       <td>sport</td>
     </tr>
     <tr>
@@ -1058,55 +1460,151 @@ Jumlah kata dalam vocabulary: 3315
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
       <th>195</th>
       <td>196</td>
-      <td>-0.192280</td>
-      <td>1.026721</td>
-      <td>1.448982</td>
+      <td>-0.160536</td>
+      <td>0.381440</td>
+      <td>-0.168062</td>
+      <td>-0.042283</td>
+      <td>-0.014290</td>
+      <td>-0.339572</td>
+      <td>0.103667</td>
+      <td>0.506388</td>
+      <td>-0.177435</td>
+      <td>...</td>
+      <td>-0.078550</td>
+      <td>-0.016682</td>
+      <td>0.060470</td>
+      <td>0.491271</td>
+      <td>0.279015</td>
+      <td>0.085363</td>
+      <td>-0.107560</td>
+      <td>0.437987</td>
+      <td>-0.086160</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>196</th>
       <td>197</td>
-      <td>-0.216425</td>
-      <td>-0.050297</td>
-      <td>1.555020</td>
+      <td>-0.065923</td>
+      <td>0.044109</td>
+      <td>0.028859</td>
+      <td>0.093955</td>
+      <td>0.230081</td>
+      <td>-0.465478</td>
+      <td>0.034411</td>
+      <td>0.529269</td>
+      <td>-0.399567</td>
+      <td>...</td>
+      <td>0.014476</td>
+      <td>-0.004727</td>
+      <td>0.234240</td>
+      <td>0.582028</td>
+      <td>0.273730</td>
+      <td>0.157620</td>
+      <td>-0.055085</td>
+      <td>0.324436</td>
+      <td>-0.035347</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>197</th>
       <td>198</td>
-      <td>0.112577</td>
-      <td>0.133109</td>
-      <td>1.767392</td>
+      <td>-0.266268</td>
+      <td>0.290335</td>
+      <td>-0.040651</td>
+      <td>-0.081998</td>
+      <td>0.030053</td>
+      <td>-0.282371</td>
+      <td>0.102569</td>
+      <td>0.643008</td>
+      <td>-0.116871</td>
+      <td>...</td>
+      <td>0.049918</td>
+      <td>0.073515</td>
+      <td>0.031362</td>
+      <td>0.551171</td>
+      <td>0.389566</td>
+      <td>-0.001021</td>
+      <td>-0.128885</td>
+      <td>0.462793</td>
+      <td>-0.289151</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>198</th>
       <td>199</td>
-      <td>-0.301265</td>
-      <td>1.090153</td>
-      <td>1.325101</td>
+      <td>-0.210523</td>
+      <td>0.486026</td>
+      <td>-0.073050</td>
+      <td>0.062198</td>
+      <td>-0.050566</td>
+      <td>-0.266277</td>
+      <td>0.078887</td>
+      <td>0.586431</td>
+      <td>-0.063704</td>
+      <td>...</td>
+      <td>-0.124186</td>
+      <td>0.027323</td>
+      <td>0.060592</td>
+      <td>0.583695</td>
+      <td>0.387982</td>
+      <td>0.194273</td>
+      <td>-0.090332</td>
+      <td>0.456119</td>
+      <td>-0.148641</td>
       <td>finance</td>
     </tr>
     <tr>
       <th>199</th>
       <td>200</td>
-      <td>-0.225183</td>
-      <td>0.856821</td>
-      <td>1.422120</td>
+      <td>-0.003747</td>
+      <td>-0.080406</td>
+      <td>-0.334351</td>
+      <td>0.152383</td>
+      <td>0.283011</td>
+      <td>-0.156256</td>
+      <td>-0.135360</td>
+      <td>0.583204</td>
+      <td>-0.220785</td>
+      <td>...</td>
+      <td>0.128804</td>
+      <td>-0.034839</td>
+      <td>-0.304787</td>
+      <td>0.540954</td>
+      <td>0.249202</td>
+      <td>0.294275</td>
+      <td>0.030532</td>
+      <td>0.314476</td>
+      <td>0.174591</td>
       <td>finance</td>
     </tr>
   </tbody>
 </table>
-<p>200 rows × 5 columns</p>
+<p>200 rows × 102 columns</p>
 </div></div></div>
 </div>
 </section>
 <section id="menentukan-fitur-dan-label">
-<h2>10. Menentukan Fitur dan Label<a class="headerlink" href="#menentukan-fitur-dan-label" title="Link to this heading">#</a></h2>
+<h2>10. Menentukan Fitur dan Label<a class="headerlink" href="#menentukan-fitur-dan-label" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini data dipisahkan menjadi fitur dan label.</p>
 <p>Variabel X berisi tiga nilai vektor dari setiap berita yang digunakan sebagai fitur klasifikasi.</p>
 <p>Variabel y berisi label berita yang menjadi target klasifikasi.</p>
@@ -1124,7 +1622,7 @@ Jumlah kata dalam vocabulary: 3315
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran fitur: (200, 3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ukuran fitur: (200, 100)
 Jumlah label: 200
 </pre></div>
 </div>
@@ -1146,15 +1644,15 @@ Jumlah label: 200
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data training : (160, 3)
-Data testing  : (40, 3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data training : (160, 100)
+Data testing  : (40, 100)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="klasifikasi-menggunakan-naive-bayes">
-<h2>11. Klasifikasi Menggunakan Naive Bayes<a class="headerlink" href="#klasifikasi-menggunakan-naive-bayes" title="Link to this heading">#</a></h2>
+<h2>11. Klasifikasi Menggunakan Naive Bayes<a class="headerlink" href="#klasifikasi-menggunakan-naive-bayes" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini digunakan algoritma Gaussian Naive Bayes untuk melakukan klasifikasi berita.</p>
 <p>Model dilatih menggunakan data training yang terdiri dari vektor berita dan labelnya. Setelah proses pelatihan selesai, model digunakan untuk memprediksi label pada data testing.</p>
 <p>Hasil prediksi disimpan dalam variabel y_pred.</p>
@@ -1180,7 +1678,7 @@ Data testing  : (40, 3)
 </div>
 </section>
 <section id="evaluasi-menggunakan-accuracy-dan-classification-report">
-<h2>12. Evaluasi Menggunakan Accuracy dan Classification Report<a class="headerlink" href="#evaluasi-menggunakan-accuracy-dan-classification-report" title="Link to this heading">#</a></h2>
+<h2>12. Evaluasi Menggunakan Accuracy dan Classification Report<a class="headerlink" href="#evaluasi-menggunakan-accuracy-dan-classification-report" title="Permalink to this heading">#</a></h2>
 <p>Pada tahap ini dilakukan evaluasi terhadap hasil klasifikasi.</p>
 <p>Akurasi digunakan untuk mengetahui persentase prediksi yang benar dari seluruh data testing.</p>
 <p>Selain akurasi, digunakan classification report yang menampilkan nilai precision, recall, dan F1-score untuk setiap kelas.</p>
@@ -1197,24 +1695,24 @@ Data testing  : (40, 3)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.95
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.975
 
 Classification Report:
               precision    recall  f1-score   support
 
-     finance       0.91      1.00      0.95        20
-       sport       1.00      0.90      0.95        20
+     finance       0.95      1.00      0.98        20
+       sport       1.00      0.95      0.97        20
 
-    accuracy                           0.95        40
-   macro avg       0.95      0.95      0.95        40
-weighted avg       0.95      0.95      0.95        40
+    accuracy                           0.97        40
+   macro avg       0.98      0.97      0.97        40
+weighted avg       0.98      0.97      0.97        40
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="confusion-matrix">
-<h2>13. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<h2>13. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h2>
 <p>Confusion matrix digunakan untuk melihat jumlah prediksi benar dan salah pada masing-masing kelas.</p>
 <p>Berdasarkan hasil confusion matrix, terdapat 20 data finance yang diprediksi dengan benar sebagai finance dan 18 data sport yang diprediksi dengan benar sebagai sport.</p>
 <p>Terdapat 2 data sport yang diprediksi sebagai finance, sehingga jumlah prediksi yang benar adalah 38 dari 40 data testing.</p>
@@ -1230,7 +1728,7 @@ weighted avg       0.95      0.95      0.95        40
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confusion Matrix:
 [[20  0]
- [ 2 18]]
+ [ 1 19]]
 </pre></div>
 </div>
 </div>
@@ -1301,17 +1799,15 @@ weighted avg       0.95      0.95      0.95        40
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item"><div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-membaca-dataset">1. Import Library dan Membaca Dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menyiapkan-stopword-dan-stemming">2. Menyiapkan Stopword dan Stemming</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-teks">3. Preprocessing Teks</a></li>
@@ -1349,7 +1845,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>
@@ -1373,8 +1869,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
