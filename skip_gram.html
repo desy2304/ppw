@@ -655,23 +655,12 @@ document.write(`
 <span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">91</span>             <span class="k">return</span>
 
-<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:110,</span> in <span class="ni">Context.accept_prefix_visitors</span><span class="nt">(self, visitors)</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">removalCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">removals</span><span class="p">)</span>
+<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:111,</span> in <span class="ni">Context.accept_prefix_visitors</span><span class="nt">(self, visitors)</span>
 <span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">for</span> <span class="n">visitor</span> <span class="ow">in</span> <span class="n">visitors</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">visitor</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">110</span>     <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">(</span><span class="n">visitor</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">111</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_word</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_word</span>
-
-<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Context.py:97,</span> in <span class="ni">Context.accept</span><span class="nt">(self, visitor)</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span> <span class="k">def</span><span class="w"> </span><span class="nf">accept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visitor</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">97</span>     <span class="n">visitor</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-<span class="nn">File F:\ppw\tugas\enWebmining\lib\site-packages\Sastrawi\Stemmer\Context\Visitor\AbstractDisambiguatePrefixRule.py:15,</span> in <span class="ni">AbstractDisambiguatePrefixRule.visit</span><span class="nt">(self, context)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">disambiguator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">disambiguators</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">disambiguator</span><span class="o">.</span><span class="n">disambiguate</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">current_word</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="k">break</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_is_stopped</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -829,6 +818,13 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model Skip-gram berhasil dibuat
 Jumlah kata dalam vocabulary: 3307
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"word2vec_skipgram.model"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1672,6 +1668,20 @@ Data testing  : (40, 100)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediksi selesai.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="s2">"naive_bayes.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['naive_bayes.pkl']
 </pre></div>
 </div>
 </div>

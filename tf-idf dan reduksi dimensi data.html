@@ -441,17 +441,66 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"dataset_berita.csv"</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named 'pandas'
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(200, 3)
 </pre></div>
 </div>
-</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>isi_berita</th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Jepang - Austin Krajicek-Nikola Mektic berhasi...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Jorge Martin sedang memperjuangkan titel juara...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Rider Indonesia Veda Ega Pratama balapan di Ma...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Pelatih speed tim panjat tebing, Fitriyani, me...</td>
+      <td>sport</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Pertamina Grand Prix of Indonesia 2026 sudah m...</td>
+      <td>sport</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="preprocessing-data">
@@ -477,57 +526,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">emoji</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span><span class="w"> </span><span class="nf">cleaning</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>isi_berita</th>
-      <th>isi_bersih</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Jepang - Austin Krajicek-Nikola Mektic berhasi...</td>
-      <td>jepang austin krajicek nikola mektic berhasil ...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Jorge Martin sedang memperjuangkan titel juara...</td>
-      <td>jorge martin sedang memperjuangkan titel juara...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Rider Indonesia Veda Ega Pratama balapan di Ma...</td>
-      <td>rider indonesia veda ega pratama balapan di ma...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Pelatih speed tim panjat tebing, Fitriyani, me...</td>
-      <td>pelatih speed tim panjat tebing fitriyani meng...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Pertamina Grand Prix of Indonesia 2026 sudah m...</td>
-      <td>pertamina grand prix of indonesia sudah melahi...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<span class="ne">ModuleNotFoundError</span>: No module named 'emoji'
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
