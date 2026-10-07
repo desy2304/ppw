@@ -4,6 +4,7 @@ import string
 import re
 import joblib
 
+from pathlib import Path
 from gensim.models import Word2Vec
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -19,20 +20,27 @@ st.set_page_config(
     layout="centered"
 )
 
+# =========================
+# PATH MODEL
+# =========================
 
-# =========================================================
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model"
+
+
+# =========================
 # LOAD MODEL
-# =========================================================
+# =========================
 
 @st.cache_resource
 def load_model():
 
     model = Word2Vec.load(
-        "model/word2vec_skipgram.model"
+        str(MODEL_DIR / "word2vec_skipgram.model")
     )
 
     nb = joblib.load(
-        "model/naive_bayes.pkl"
+        MODEL_DIR / "naive_bayes.pkl"
     )
 
     return model, nb
