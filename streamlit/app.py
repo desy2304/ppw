@@ -6,203 +6,486 @@ import joblib
 import trafilatura
 
 from pathlib import Path
+from urllib.parse import urlparse
+
 from gensim.models import Word2Vec
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
+
 # KONFIGURASI HALAMAN
+
 st.set_page_config(
     page_title="Klasifikasi Berita",
     layout="centered"
 )
 
+
 # PATH MODEL
+
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / "model"
 
+
 # LOAD MODEL
+
 @st.cache_resource
-def load_model():
-    # Memuat model Word2Vec Skip-gram
-    model = Word2Vec.load(
+def load_models():
+
+    # Load model Word2Vec Skip-gram
+    skipgram_model = Word2Vec.load(
         str(MODEL_DIR / "word2vec_skipgram.model")
     )
 
-    # Memuat model Gaussian Naive Bayes
-    nb = joblib.load(
+    # Load model Gaussian Naive Bayes
+    nb_model = joblib.load(
         MODEL_DIR / "naive_bayes.pkl"
     )
 
-    return model, nb
+    return skipgram_model, nb_model
 
-model, nb = load_model()
 
-# STOPWORD DAN STEMMING
-# Mengambil daftar stopword Bahasa Indonesia
+skipgram_model, nb_model = load_models()
+
+
+# LOAD STOPWORD DAN STEMMER
+
 stop_factory = StopWordRemoverFactory()
-stopwords = set(stop_factory.get_stop_words())
+stop_words = set(stop_factory.get_stop_words())
 
-# Membuat stemmer Bahasa Indonesia
 stem_factory = StemmerFactory()
 stemmer = stem_factory.create_stemmer()
 
-# PREPROCESSING
+
+# FUNGSI PREPROCESSING
+
 def preprocessing(teks):
-    # Mengubah teks menjadi huruf kecil
+
+    # 1. Lowercase
     teks = teks.lower()
 
-    # Menghapus tanda baca
+    # 2. Menghapus tanda baca
     teks = teks.translate(
         str.maketrans('', '', string.punctuation)
     )
 
-    # Menghapus angka
-    teks = re.sub(r'\d+', '', teks)
+    # 3. Menghapus angka
+    teks = re.sub(r"\d+", " ", teks)
 
-    # Tokenisasi sederhana berdasarkan spasi
-    kata = teks.split()
+    # 4. Menghapus spasi berlebih
+    teks = re.sub(r"\s+", " ", teks).strip()
 
-    # Menghapus stopword
-    kata = [
-        k for k in kata
-        if k not in stopwords
+    # 5. Tokenisasi
+    tokens = teks.split()
+
+    # 6. Stopword removal
+    tokens = [
+        kata
+        for kata in tokens
+        if kata not in stop_words
     ]
 
-    # Melakukan stemming
-    kata = [
-        stemmer.stem(k)
-        for k in kata
+    # 7. Stemming
+    tokens = [
+        stemmer.stem(kata)
+        for kata in tokens
     ]
 
-    return kata
+    return tokens
 
-# MEMBUAT VEKTOR BERITA
-def buat_vektor_berita(tokens, model):
-    vektor_kata = []
 
-    # Mengambil vektor setiap kata yang terdapat dalam model
-    for kata in tokens:
-        if kata in model.wv:
-            vektor_kata.append(model.wv[kata])
+# FUNGSI DOCUMENT VECTOR / VSM
 
-    # Menggunakan rata-rata vektor kata sebagai vektor berita
-    if len(vektor_kata) > 0:
-        return np.mean(vektor_kata, axis=0)
+def document_vector(tokens, model):
 
-    # Jika tidak ada kata yang dikenali model
-    return np.zeros(model.vector_size)
+    vectors = []
 
-# MENGAMBIL ISI BERITA DARI URL
-def ambil_isi_berita(url):
+    for word in tokens:
+
+        if word in model.wv:
+            vectors.append(
+                model.wv[word]
+            )
+
+    # Jika tidak ada kata yang dikenal model
+    if len(vectors) == 0:
+
+        return np.zeros(
+            model.vector_size
+        )
+
+    # Rata-rata vector semua kata
+    return np.mean(
+        vectors,
+        axis=0
+    )
+
+
+# FUNGSI VALIDASI URL
+
+def validasi_url(url):
+
     try:
-        # Mengambil halaman berita dari URL
+
+        parsed_url = urlparse(url)
+
+        domain = parsed_url.netloc.lower()
+        path = parsed_url.path.lower()
+
+        # Menghilangkan www jika ada
+        domain = domain.replace("www.", "")
+
+        # Mengecek kategori berdasarkan domain
+        if domain == "sport.detik.com":
+
+            kategori_url = "sport"
+
+        elif domain == "finance.detik.com":
+
+            kategori_url = "finance"
+
+        else:
+
+            return (
+                False,
+                None,
+                "URL harus berasal dari Detik Sport atau Detik Finance."
+            )
+
+        # Memastikan URL merupakan halaman artikel
+        if not re.search(r"/d-\d+", path):
+
+            return (
+                False,
+                None,
+                "URL yang dimasukkan bukan URL artikel berita Detik."
+            )
+
+        return True, kategori_url, None
+
+    except Exception:
+
+        return (
+            False,
+            None,
+            "Format URL tidak valid."
+        )
+
+
+# FUNGSI MENGAMBIL ARTIKEL DARI URL
+
+def extract_article(url):
+
+    try:
+
+        # Mengambil halaman berita
         downloaded = trafilatura.fetch_url(url)
 
-        if not downloaded:
+        if downloaded is None:
             return None
 
         # Mengekstrak isi utama artikel
-        isi = trafilatura.extract(downloaded, favor_recall=True)
+        text = trafilatura.extract(
+            downloaded,
+            favor_recall=True,
+            include_comments=False,
+            include_tables=False
+        )
 
-        return isi
+        return text
 
     except Exception:
+
         return None
 
+
+# FUNGSI VALIDASI ISI ARTIKEL
+
+def validasi_isi(tokens, model):
+
+    # Minimal jumlah token
+    if len(tokens) < 20:
+
+        return (
+            False,
+            "Isi berita terlalu pendek untuk dianalisis."
+        )
+
+    # Menghitung kata yang terdapat dalam vocabulary Word2Vec
+    kata_dikenal = [
+        kata
+        for kata in tokens
+        if kata in model.wv
+    ]
+
+    # Menghitung persentase kata yang dikenal model
+    rasio_kata_dikenal = (
+        len(kata_dikenal) / len(tokens)
+    )
+
+    # Minimal 20% kata harus dikenal model
+    if rasio_kata_dikenal < 0.20:
+
+        return (
+            False,
+            "Isi berita tidak cukup sesuai dengan kosakata model."
+        )
+
+    return True, None
+
+
 # TAMPILAN APLIKASI
+
 st.title("Klasifikasi Berita")
 
 st.write(
     """
-    Aplikasi klasifikasi berita menggunakan
+    Klasifikasi berita menggunakan
     **Word2Vec Skip-gram** dan **Gaussian Naive Bayes**.
 
-    Masukkan URL berita Detik untuk mengetahui apakah berita
-    termasuk kategori **Sport** atau **Finance**.
+    Masukkan URL berita dari kategori
+    **Sport** atau **Finance**.
     """
 )
 
 st.divider()
 
-# INPUT BERITA
-url_berita = st.text_input("Masukkan URL Berita Detik", placeholder="https://sport.detik.com/...")
 
-# PROSES KLASIFIKASI
+# INPUT URL
+
+url = st.text_input(
+    "Masukkan URL berita:",
+    placeholder="https://sport.detik.com/..."
+)
+
+
+# TOMBOL KLASIFIKASI
+
 if st.button(
-    "Klasifikasikan Berita",
+    "Klasifikasi Berita",
     use_container_width=True
 ):
-    # Mengecek apakah URL sudah diisi
-    if not url_berita.strip():
-        st.warning("Silakan masukkan URL berita terlebih dahulu.")
 
-    # Memastikan URL berasal dari Detik.com
-    elif "detik.com" not in url_berita.lower():
-        st.warning("Silakan masukkan URL berita dari Detik.com.")
+    # Mengecek input URL
+
+    if not url.strip():
+
+        st.warning(
+            "Silakan masukkan URL berita terlebih dahulu."
+        )
 
     else:
-        # Mengambil isi artikel dari URL
-        with st.spinner("Mengambil isi berita..."):
-            teks_berita = ambil_isi_berita(url_berita)
 
-        if not teks_berita:
-            st.error(
-                "Isi berita gagal diambil dari URL. "
-                "Pastikan URL berita dapat diakses."
-            )
+        # Validasi URL
+
+        url_valid, kategori_url, pesan_error = validasi_url(url)
+
+        if not url_valid:
+
+            st.warning(pesan_error)
 
         else:
-            st.success("Isi berita berhasil diambil.")
 
-            # Menampilkan isi berita yang berhasil diambil
-            with st.expander("Lihat Isi Berita"):
-                st.write(teks_berita)
+            # Mengambil artikel
 
-            # Melakukan preprocessing
-            tokens = preprocessing(teks_berita)
+            with st.spinner(
+                "Mengambil isi berita..."
+            ):
 
-            # Mengecek hasil preprocessing
-            if len(tokens) == 0:
-                st.error("Isi berita tidak memiliki kata yang dapat diproses.")
+                artikel = extract_article(url)
+
+
+            # Mengecek hasil scraping
+
+            if artikel is None:
+
+                st.error(
+                    "Gagal mengambil isi berita dari URL tersebut."
+                )
+
+                st.info(
+                    "Pastikan URL merupakan halaman artikel "
+                    "berita yang dapat diakses."
+                )
 
             else:
-                # Mengubah berita menjadi vektor
-                vector = buat_vektor_berita(tokens, model)
 
-                # Mengubah vektor menjadi bentuk 2 dimensi
-                vector = vector.reshape(1, -1)
+                # Menampilkan isi artikel
 
-                # Melakukan prediksi menggunakan Naive Bayes
-                prediksi = nb.predict(vector)[0]
+                st.success(
+                    "Artikel berhasil diambil."
+                )
 
-                # Mengambil probabilitas setiap kelas
-                probabilitas = nb.predict_proba(vector)[0]
-                kelas = nb.classes_
+                with st.expander(
+                    "Lihat isi berita"
+                ):
 
-                # Mengambil probabilitas tertinggi
-                probabilitas_tertinggi = np.max(probabilitas)
+                    st.write(artikel)
 
-                st.divider()
 
-                # HASIL KLASIFIKASI
-                st.subheader("Hasil Klasifikasi")
+                # PREPROCESSING
 
-                if prediksi == "sport":
-                    st.success("Berita termasuk kategori **SPORT**")
+                tokens = preprocessing(
+                    artikel
+                )
 
-                elif prediksi == "finance":
-                    st.success("Berita termasuk kategori **FINANCE**")
+
+                # Validasi isi artikel
+
+                isi_valid, pesan_error = validasi_isi(
+                    tokens,
+                    skipgram_model
+                )
+
+
+                if not isi_valid:
+
+                    st.warning(
+                        pesan_error
+                    )
 
                 else:
-                    st.success(f"Berita termasuk kategori **{prediksi.upper()}**")
 
-                # Menampilkan tingkat keyakinan model
-                st.metric("Tingkat Keyakinan", f"{probabilitas_tertinggi * 100:.2f}%")
+                    # DOCUMENT VECTOR / VSM
 
-                # PROBABILITAS KELAS
-                st.subheader("Probabilitas")
+                    vector = document_vector(
+                        tokens,
+                        skipgram_model
+                    )
 
-                for nama_kelas, nilai in zip(kelas, probabilitas):
-                    st.write(f"**{nama_kelas.upper()}**")
-                    st.progress(float(nilai))
-                    st.caption(f"{nilai * 100:.2f}%")
+
+                    # Mengubah vector menjadi bentuk 2D
+
+                    X_input = np.array(
+                        [vector]
+                    )
+
+
+                    # PREDIKSI
+
+                    prediction = nb_model.predict(
+                        X_input
+                    )[0]
+
+
+                    # PROBABILITAS
+
+                    probabilities = nb_model.predict_proba(
+                        X_input
+                    )[0]
+
+                    classes = nb_model.classes_
+
+
+                    # Mengambil probabilitas Sport dan Finance
+
+                    prob_sport = 0
+                    prob_finance = 0
+
+                    for nama_kelas, nilai in zip(
+                        classes,
+                        probabilities
+                    ):
+
+                        if str(nama_kelas).lower() == "sport":
+
+                            prob_sport = nilai
+
+                        elif str(nama_kelas).lower() == "finance":
+
+                            prob_finance = nilai
+
+
+                    # Menghitung confidence tertinggi
+
+                    confidence = max(
+                        prob_sport,
+                        prob_finance
+                    )
+
+
+                    # Menghitung selisih probabilitas
+
+                    margin = abs(
+                        prob_sport - prob_finance
+                    )
+
+
+                    # HASIL KLASIFIKASI
+
+                    st.divider()
+
+                    st.subheader(
+                        "Hasil Klasifikasi"
+                    )
+
+
+                    # Threshold confidence
+
+                    threshold = 0.70
+
+                    # Minimum selisih antar kelas
+
+                    minimum_margin = 0.20
+
+
+                    if (
+                        confidence >= threshold
+                        and margin >= minimum_margin
+                    ):
+
+                        if str(prediction).lower() == "sport":
+
+                            st.success(
+                                "Berita termasuk kategori **SPORT**"
+                            )
+
+                        elif str(prediction).lower() == "finance":
+
+                            st.success(
+                                "Berita termasuk kategori **FINANCE**"
+                            )
+
+                        else:
+
+                            st.warning(
+                                f"Kategori: **{str(prediction).upper()}**"
+                            )
+
+                    else:
+
+                        st.warning(
+                            "Berita tidak cukup kuat untuk "
+                            "diklasifikasikan sebagai SPORT atau FINANCE."
+                        )
+
+
+                    # CONFIDENCE
+
+                    st.metric(
+                        "Tingkat Keyakinan",
+                        f"{confidence * 100:.2f}%"
+                    )
+
+
+                    # PROBABILITAS
+
+                    st.subheader(
+                        "Probabilitas Klasifikasi"
+                    )
+
+                    probability_data = []
+
+                    for nama_kelas, nilai in zip(
+                        classes,
+                        probabilities
+                    ):
+
+                        probability_data.append({
+                            "Kategori": str(nama_kelas).upper(),
+                            "Probabilitas": f"{nilai * 100:.2f}%"
+                        })
+
+                    st.table(
+                        probability_data
+                    )
