@@ -368,16 +368,27 @@ if st.button(
                     )[0]
 
 
-                    # PROBABILITAS
+                    # PROBABILITAS ASLI
 
-                    probabilities = nb_model.predict_proba(
+                    probabilities_asli = nb_model.predict_proba(
                         X_input
                     )[0]
 
                     classes = nb_model.classes_
 
 
-                    # Mengambil probabilitas Sport dan Finance
+                    # SMOOTHING PROBABILITAS
+
+                    alpha = 0.05
+
+                    probabilities = (
+                        probabilities_asli + alpha
+                    ) / (
+                        1 + (alpha * len(classes))
+                    )
+
+
+                    # Mengambil probabilitas masing-masing kelas
 
                     prob_sport = 0
                     prob_finance = 0
@@ -388,15 +399,15 @@ if st.button(
                     ):
 
                         if str(nama_kelas).lower() == "sport":
-
+                        
                             prob_sport = nilai
 
                         elif str(nama_kelas).lower() == "finance":
-
+                        
                             prob_finance = nilai
 
 
-                    # Menghitung confidence tertinggi
+                    # Confidence
 
                     confidence = max(
                         prob_sport,
@@ -404,7 +415,7 @@ if st.button(
                     )
 
 
-                    # Menghitung selisih probabilitas
+                    # Selisih probabilitas
 
                     margin = abs(
                         prob_sport - prob_finance
@@ -420,12 +431,7 @@ if st.button(
                     )
 
 
-                    # Threshold confidence
-
                     threshold = 0.70
-
-                    # Minimum selisih antar kelas
-
                     minimum_margin = 0.20
 
 
@@ -435,32 +441,32 @@ if st.button(
                     ):
 
                         if str(prediction).lower() == "sport":
-
+                        
                             st.success(
                                 "Berita termasuk kategori **SPORT**"
                             )
 
                         elif str(prediction).lower() == "finance":
-
+                        
                             st.success(
                                 "Berita termasuk kategori **FINANCE**"
                             )
 
                         else:
-
+                        
                             st.warning(
                                 f"Kategori: **{str(prediction).upper()}**"
                             )
 
                     else:
-
+                    
                         st.warning(
                             "Berita tidak cukup kuat untuk "
                             "diklasifikasikan sebagai SPORT atau FINANCE."
                         )
 
 
-                    # CONFIDENCE
+                    # TINGKAT KEYAKINAN
 
                     st.metric(
                         "Tingkat Keyakinan",
