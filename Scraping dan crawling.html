@@ -466,22 +466,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">36</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">return</span> <span class="n">links</span><span class="p">[:</span><span class="n">target</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">link_sport</span> <span class="o">=</span> <span class="n">ambil_link_berita</span><span class="p">(</span><span class="s2">"https://sport.detik.com"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">link_finance</span> <span class="o">=</span> <span class="n">ambil_link_berita</span><span class="p">(</span><span class="s2">"https://finance.detik.com"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sport berhasil di-crawling: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">link_sport</span><span class="p">)</span><span class="si">}</span><span class="s2"> berita"</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Finance berhasil di-crawling: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">link_finance</span><span class="p">)</span><span class="si">}</span><span class="s2"> berita"</span><span class="p">)</span>
-
-<span class="nn">Cell In[1], line 30,</span> in <span class="ni">ambil_link_berita</span><span class="nt">(base_url, target)</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>         <span class="k">break</span>
-<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="k">return</span> <span class="n">links</span><span class="p">[:</span><span class="n">target</span><span class="p">]</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sport berhasil di-crawling: 100 berita
+Finance berhasil di-crawling: 100 berita
+Total berita berhasil di-crawling: 200 berita
 </pre></div>
 </div>
 </div>
@@ -543,11 +530,122 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 100/100
-[finance] 100/100
-Data Sport Berhasil di Ekstrak: 100, Gagal: 0
-Data Finance Berhasil di Ekstrak: 100, Gagal: 0
-Total Data Berhasil di Ekstrak: 200
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 1/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 2/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 3/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 4/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 5/100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 6/100
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">35</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="nb">print</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">gagal</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">data_sport</span><span class="p">,</span> <span class="n">gagal_sport</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_sport</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="n">data_finance</span><span class="p">,</span> <span class="n">gagal_finance</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_finance</span><span class="p">,</span> <span class="s2">"finance"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data Sport Berhasil di Ekstrak: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">, Gagal: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gagal_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nn">Cell In[2], line 18,</span> in <span class="ni">ekstrak_dataset</span><span class="nt">(links, label, target)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">isi</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">if</span> <span class="n">downloaded</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">isi</span> <span class="o">=</span> <span class="n">trafilatura</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">downloaded</span><span class="p">,</span> <span class="n">favor_recall</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="k">if</span> <span class="n">isi</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"isi_berita"</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">"label"</span><span class="p">:</span> <span class="n">label</span><span class="p">})</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\trafilatura\core.py:550,</span> in <span class="ni">extract</span><span class="nt">(filecontent, url, record_id, fast, no_fallback, favor_precision, favor_recall, include_comments, output_format, tei_validation, target_language, include_tables, include_images, include_formatting, include_links, deduplicate, date_extraction_params, with_metadata, only_with_metadata, max_tree_size, url_blacklist, author_blacklist, settingsfile, prune_xpath, config, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">510</span><span class="w"> </span><span class="sd">"""Main function exposed by the package:</span>
+<span class="g g-Whitespace">    </span><span class="mi">511</span><span class="sd">    Wrapper for text extraction and conversion to chosen output format.</span>
+<span class="g g-Whitespace">    </span><span class="mi">512</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span><span class="sd"> """</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span> <span class="c1"># must stay the first statement: a signature drift raises TypeError</span>
+<span class="ne">--&gt; </span><span class="mi">550</span> <span class="n">document</span> <span class="o">=</span> <span class="n">_internal_extraction</span><span class="p">(</span><span class="o">**</span><span class="nb">locals</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span> <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">text</span> <span class="k">if</span> <span class="n">document</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\trafilatura\core.py:705,</span> in <span class="ni">_internal_extraction</span><span class="nt">(filecontent, url, record_id, fast, no_fallback, favor_precision, favor_recall, include_comments, output_format, tei_validation, target_language, include_tables, include_images, include_formatting, include_links, deduplicate, date_extraction_params, with_metadata, only_with_metadata, max_tree_size, url_blacklist, author_blacklist, settingsfile, prune_xpath, config, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">682</span>     <span class="n">options</span> <span class="o">=</span> <span class="n">Extractor</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">683</span>         <span class="n">config</span><span class="o">=</span><span class="n">use_config</span><span class="p">(</span><span class="n">settingsfile</span><span class="p">)</span> <span class="k">if</span> <span class="n">settingsfile</span> <span class="k">else</span> <span class="n">config</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span>         <span class="n">output_format</span><span class="o">=</span><span class="n">output_format</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span>         <span class="n">date_params</span><span class="o">=</span><span class="n">date_extraction_params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">704</span> <span class="c1"># extraction</span>
+<span class="ne">--&gt; </span><span class="mi">705</span> <span class="n">document</span> <span class="o">=</span> <span class="n">bare_extraction</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">706</span>     <span class="n">filecontent</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span>     <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">708</span>     <span class="n">as_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">709</span>     <span class="n">prune_xpath</span><span class="o">=</span><span class="n">prune_xpath</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">710</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">712</span> <span class="c1"># post-processing</span>
+<span class="g g-Whitespace">    </span><span class="mi">713</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">document</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">Document</span><span class="p">):</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\trafilatura\core.py:382,</span> in <span class="ni">bare_extraction</span><span class="nt">(filecontent, url, fast, no_fallback, favor_precision, favor_recall, include_comments, output_format, target_language, include_tables, include_images, include_formatting, include_links, deduplicate, date_extraction_params, with_metadata, only_with_metadata, max_tree_size, url_blacklist, author_blacklist, as_dict, prune_xpath, config, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">359</span>     <span class="n">options</span> <span class="o">=</span> <span class="n">Extractor</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">360</span>         <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">361</span>         <span class="n">output_format</span><span class="o">=</span><span class="n">output_format</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span>         <span class="n">date_params</span><span class="o">=</span><span class="n">date_extraction_params</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>     <span class="c1"># load the HTML tree</span>
+<span class="ne">--&gt; </span><span class="mi">382</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">load_html</span><span class="p">(</span><span class="n">filecontent</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">max_file_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>     <span class="k">if</span> <span class="n">tree</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>         <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"empty HTML tree: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\trafilatura\utils.py:345,</span> in <span class="ni">load_html</span><span class="nt">(htmlobject, max_size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span> <span class="n">fallback_parse</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">345</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">fromstring</span><span class="p">(</span><span class="n">htmlobject</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">HTML_PARSER</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">346</span> <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="c1"># "Unicode strings with encoding declaration are not supported."</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span>     <span class="n">tree</span> <span class="o">=</span> <span class="n">fromstring_bytes</span><span class="p">(</span><span class="n">htmlobject</span><span class="p">)</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\lxml\html\__init__.py:854,</span> in <span class="ni">fromstring</span><span class="nt">(html, base_url, parser, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">852</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span>     <span class="n">is_full_html</span> <span class="o">=</span> <span class="n">_looks_like_full_html_unicode</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">854</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">document_fromstring</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">parser</span><span class="o">=</span><span class="n">parser</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="k">if</span> <span class="n">is_full_html</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="k">return</span> <span class="n">doc</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\lxml\html\__init__.py:740,</span> in <span class="ni">document_fromstring</span><span class="nt">(html, parser, ensure_head_body, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">738</span> <span class="k">if</span> <span class="n">parser</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">739</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">html_parser</span>
+<span class="ne">--&gt; </span><span class="mi">740</span> <span class="n">value</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">parser</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">741</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">742</span>     <span class="k">raise</span> <span class="n">etree</span><span class="o">.</span><span class="n">ParserError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">743</span>         <span class="s2">"Document is empty"</span><span class="p">)</span>
+
+<span class="nn">File src/lxml/etree.pyx:3435,</span> in <span class="ni">lxml.etree.fromstring</span><span class="nt">()</span>
+
+<span class="nn">File src/lxml/etree.pyx:497,</span> in <span class="ni">lxml.etree._Document.getroot</span><span class="nt">()</span>
+
+<span class="nn">File src/lxml/etree.pyx:1753,</span> in <span class="ni">lxml.etree._elementFactory</span><span class="nt">()</span>
+
+<span class="nn">File src/lxml/classlookup.pxi:404,</span> in <span class="ni">lxml.etree._parser_class_lookup</span><span class="nt">()</span>
+
+<span class="nn">File src/lxml/classlookup.pxi:457,</span> in <span class="ni">lxml.etree._custom_class_lookup</span><span class="nt">()</span>
+
+<span class="nn">File C:\laragon\bin\python\python-3.10\lib\site-packages\lxml\html\__init__.py:714,</span> in <span class="ni">HtmlElementClassLookup.lookup</span><span class="nt">(self, node_type, document, namespace, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">711</span>             <span class="n">classes</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">cur</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="p">{})</span>
+<span class="g g-Whitespace">    </span><span class="mi">712</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_element_classes</span> <span class="o">=</span> <span class="n">classes</span>
+<span class="ne">--&gt; </span><span class="mi">714</span> <span class="k">def</span><span class="w"> </span><span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_type</span><span class="p">,</span> <span class="n">document</span><span class="p">,</span> <span class="n">namespace</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">715</span>     <span class="k">if</span> <span class="n">node_type</span> <span class="o">==</span> <span class="s1">'element'</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">716</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_classes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">HtmlElement</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
