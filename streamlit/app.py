@@ -7,14 +7,12 @@ import trafilatura
 
 from pathlib import Path
 from urllib.parse import urlparse
-
 from gensim.models import Word2Vec
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 
 # KONFIGURASI HALAMAN
-
 st.set_page_config(
     page_title="Klasifikasi Berita",
     layout="centered"
@@ -22,13 +20,11 @@ st.set_page_config(
 
 
 # PATH MODEL
-
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / "model"
 
 
 # LOAD MODEL
-
 @st.cache_resource
 def load_models():
 
@@ -49,7 +45,6 @@ skipgram_model, nb_model = load_models()
 
 
 # LOAD STOPWORD DAN STEMMER
-
 stop_factory = StopWordRemoverFactory()
 stop_words = set(stop_factory.get_stop_words())
 
@@ -58,7 +53,6 @@ stemmer = stem_factory.create_stemmer()
 
 
 # FUNGSI PREPROCESSING
-
 def preprocessing(teks):
 
     # 1. Lowercase
@@ -95,7 +89,6 @@ def preprocessing(teks):
 
 
 # FUNGSI DOCUMENT VECTOR / VSM
-
 def document_vector(tokens, model):
 
     vectors = []
@@ -122,11 +115,8 @@ def document_vector(tokens, model):
 
 
 # FUNGSI VALIDASI URL
-
 def validasi_url(url):
-
     try:
-
         parsed_url = urlparse(url)
 
         domain = parsed_url.netloc.lower()
@@ -137,15 +127,12 @@ def validasi_url(url):
 
         # Mengecek kategori berdasarkan domain
         if domain == "sport.detik.com":
-
             kategori_url = "sport"
 
         elif domain == "finance.detik.com":
-
             kategori_url = "finance"
 
         else:
-
             return (
                 False,
                 None,
@@ -154,7 +141,6 @@ def validasi_url(url):
 
         # Memastikan URL merupakan halaman artikel
         if not re.search(r"/d-\d+", path):
-
             return (
                 False,
                 None,
@@ -164,7 +150,6 @@ def validasi_url(url):
         return True, kategori_url, None
 
     except Exception:
-
         return (
             False,
             None,
@@ -173,11 +158,8 @@ def validasi_url(url):
 
 
 # FUNGSI MENGAMBIL ARTIKEL DARI URL
-
 def extract_article(url):
-
     try:
-
         # Mengambil halaman berita
         downloaded = trafilatura.fetch_url(url)
 
@@ -195,17 +177,13 @@ def extract_article(url):
         return text
 
     except Exception:
-
         return None
 
 
 # FUNGSI VALIDASI ISI ARTIKEL
-
 def validasi_isi(tokens, model):
-
     # Minimal jumlah token
     if len(tokens) < 20:
-
         return (
             False,
             "Isi berita terlalu pendek untuk dianalisis."
@@ -225,7 +203,6 @@ def validasi_isi(tokens, model):
 
     # Minimal 20% kata harus dikenal model
     if rasio_kata_dikenal < 0.20:
-
         return (
             False,
             "Isi berita tidak cukup sesuai dengan kosakata model."
@@ -235,7 +212,6 @@ def validasi_isi(tokens, model):
 
 
 # TAMPILAN APLIKASI
-
 st.title("Klasifikasi Berita")
 
 st.write(
@@ -252,7 +228,6 @@ st.divider()
 
 
 # INPUT URL
-
 url = st.text_input(
     "Masukkan URL berita:",
     placeholder="https://sport.detik.com/..."
@@ -260,99 +235,71 @@ url = st.text_input(
 
 
 # TOMBOL KLASIFIKASI
-
 if st.button(
     "Klasifikasi Berita",
     use_container_width=True
 ):
 
     # Mengecek input URL
-
     if not url.strip():
-
         st.warning(
             "Silakan masukkan URL berita terlebih dahulu."
         )
 
     else:
-
         # Validasi URL
-
         url_valid, kategori_url, pesan_error = validasi_url(url)
 
         if not url_valid:
-
             st.warning(pesan_error)
-
         else:
-
             # Mengambil artikel
-
             with st.spinner(
                 "Mengambil isi berita..."
             ):
-
                 artikel = extract_article(url)
 
-
             # Mengecek hasil scraping
-
             if artikel is None:
-
                 st.error(
                     "Gagal mengambil isi berita dari URL tersebut."
                 )
-
                 st.info(
                     "Pastikan URL merupakan halaman artikel "
                     "berita yang dapat diakses."
                 )
-
             else:
-
                 # Menampilkan isi artikel
-
                 st.success(
                     "Artikel berhasil diambil."
                 )
-
                 with st.expander(
                     "Lihat isi berita"
                 ):
-
                     st.write(artikel)
 
 
                 # PREPROCESSING
-
                 tokens = preprocessing(
                     artikel
                 )
 
-
                 # Validasi isi artikel
-
                 isi_valid, pesan_error = validasi_isi(
                     tokens,
                     skipgram_model
                 )
 
-
                 if not isi_valid:
-
                     st.warning(
                         pesan_error
                     )
-
                 else:
-
                     # DOCUMENT VECTOR / VSM
-
                     vector = document_vector(
                         tokens,
                         skipgram_model
                     )
-
 
                     # Mengubah vector menjadi bentuk 2D
 
@@ -360,36 +307,27 @@ if st.button(
                         [vector]
                     )
 
-
                     # PREDIKSI
-
                     prediction = nb_model.predict(
                         X_input
                     )[0]
 
-
                     # PROBABILITAS ASLI
-
                     probabilities_asli = nb_model.predict_proba(
                         X_input
                     )[0]
 
                     classes = nb_model.classes_
 
-
                     # SMOOTHING PROBABILITAS
-
                     alpha = 0.05
-
                     probabilities = (
                         probabilities_asli + alpha
                     ) / (
                         1 + (alpha * len(classes))
                     )
 
-
                     # Mengambil probabilitas masing-masing kelas
-
                     prob_sport = 0
                     prob_finance = 0
 
@@ -397,49 +335,38 @@ if st.button(
                         classes,
                         probabilities
                     ):
-
                         if str(nama_kelas).lower() == "sport":
                         
                             prob_sport = nilai
-
                         elif str(nama_kelas).lower() == "finance":
                         
                             prob_finance = nilai
 
-
                     # Confidence
-
                     confidence = max(
                         prob_sport,
                         prob_finance
                     )
 
-
                     # Selisih probabilitas
-
                     margin = abs(
                         prob_sport - prob_finance
                     )
 
-
                     # HASIL KLASIFIKASI
-
                     st.divider()
 
                     st.subheader(
                         "Hasil Klasifikasi"
                     )
 
-
                     threshold = 0.70
                     minimum_margin = 0.20
-
 
                     if (
                         confidence >= threshold
                         and margin >= minimum_margin
                     ):
-
                         if str(prediction).lower() == "sport":
                         
                             st.success(

@@ -183,6 +183,16 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="tf-idf%20dan%20reduksi%20dimensi%20data.html">Representasi TF-IDF dan Reduksi Dimensi Data Berita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="skip_gram.html">Skip-gram untuk Klasifikasi Data Berita Menggunakan Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ppw_graph.html">Graf Berarah dan Tidak Berarah</a></li>
+
+
+
+
+
+
+
+
+
 </ul>
 
     </div>
@@ -456,9 +466,22 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sport berhasil di-crawling: 100 berita
-Finance berhasil di-crawling: 100 berita
-Total berita berhasil di-crawling: 200 berita
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">36</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">return</span> <span class="n">links</span><span class="p">[:</span><span class="n">target</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">link_sport</span> <span class="o">=</span> <span class="n">ambil_link_berita</span><span class="p">(</span><span class="s2">"https://sport.detik.com"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">link_finance</span> <span class="o">=</span> <span class="n">ambil_link_berita</span><span class="p">(</span><span class="s2">"https://finance.detik.com"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sport berhasil di-crawling: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">link_sport</span><span class="p">)</span><span class="si">}</span><span class="s2"> berita"</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Finance berhasil di-crawling: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">link_finance</span><span class="p">)</span><span class="si">}</span><span class="s2"> berita"</span><span class="p">)</span>
+
+<span class="nn">Cell In[1], line 30,</span> in <span class="ni">ambil_link_berita</span><span class="nt">(base_url, target)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>         <span class="k">break</span>
+<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="k">return</span> <span class="n">links</span><span class="p">[:</span><span class="n">target</span><span class="p">]</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -520,47 +543,11 @@ Total berita berhasil di-crawling: 200 berita
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 1/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 2/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 3/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 4/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 5/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 6/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 7/100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 8/100
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">35</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="nb">print</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">gagal</span>
-<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">data_sport</span><span class="p">,</span> <span class="n">gagal_sport</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_sport</span><span class="p">,</span> <span class="s2">"sport"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="n">data_finance</span><span class="p">,</span> <span class="n">gagal_finance</span> <span class="o">=</span> <span class="n">ekstrak_dataset</span><span class="p">(</span><span class="n">link_finance</span><span class="p">,</span> <span class="s2">"finance"</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Data Sport Berhasil di Ekstrak: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">, Gagal: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gagal_sport</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="nn">Cell In[2], line 29,</span> in <span class="ni">ekstrak_dataset</span><span class="nt">(links, label, target)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>         <span class="n">gagal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">"</span><span class="se">\r</span><span class="s2">"</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">29</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="nb">print</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">gagal</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[sport] 100/100
+[finance] 100/100
+Data Sport Berhasil di Ekstrak: 100, Gagal: 0
+Data Finance Berhasil di Ekstrak: 100, Gagal: 0
+Total Data Berhasil di Ekstrak: 200
 </pre></div>
 </div>
 </div>
