@@ -168,8 +168,60 @@ if "visited" in st.session_state and "edges" in st.session_state:
 
     # Mengatur posisi node
     net.barnes_hut()
+   
+    # MEMBUAT GRAPH BERARAH
+    G = nx.DiGraph()
 
-    # Menambahkan node ke PyVis
+    # Menambahkan halaman yang sudah dikunjungi
+    G.add_nodes_from(visited)
+
+    # Mengambil hubungan antarhalaman yang sudah dikunjungi
+    edges_visited = [
+        (source, target)
+        for source, target in edges
+        if source in visited and target in visited
+    ]
+
+    # Menambahkan hubungan ke graph
+    G.add_edges_from(edges_visited)
+
+    # TABEL HASIL CRAWLING
+    st.subheader("Tabel Hubungan Antarhalaman")
+
+    df_crawling = pd.DataFrame(
+        sorted(edges_visited),
+        columns=["Source", "Target"]
+    )
+
+    st.dataframe(
+        df_crawling,
+        use_container_width=True
+    )
+
+    # VISUALISASI GRAPH
+    st.subheader("Visualisasi Graph Hasil Web Crawling")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric("Jumlah Node", G.number_of_nodes())
+
+    with col2:
+        st.metric("Jumlah Edge", G.number_of_edges())
+
+    # Membuat visualisasi interaktif
+    net = Network(
+        height="600px",
+        width="100%",
+        directed=True,
+        bgcolor="#ffffff",
+        font_color="black",
+        cdn_resources="in_line"
+    )
+
+    net.barnes_hut()
+
+    # Menambahkan node
     for i, node in enumerate(sorted(G.nodes()), start=1):
         net.add_node(
             node,
@@ -179,7 +231,7 @@ if "visited" in st.session_state and "edges" in st.session_state:
             size=15
         )
 
-    # Menambahkan edge ke PyVis
+    # Menambahkan edge
     for source, target in G.edges():
         net.add_edge(source, target)
 
