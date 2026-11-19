@@ -115,7 +115,7 @@ if "visited" in st.session_state and "edges" in st.session_state:
 
     # Membuat DataFrame hasil crawling
     df_crawling = pd.DataFrame(
-        sorted(edges),
+        sorted(edges_visited),
         columns=["Source", "Target"]
     )
 
@@ -130,12 +130,22 @@ if "visited" in st.session_state and "edges" in st.session_state:
     # VISUALISASI GRAPH
     st.subheader("Visualisasi Graph Hasil Web Crawling")
 
+    
     # Membuat graph berarah
     G = nx.DiGraph()
-
-    # Menambahkan node dan edge
+    
+    # Menambahkan hanya halaman yang telah dikunjungi
     G.add_nodes_from(visited)
-    G.add_edges_from(edges)
+    
+    # Menambahkan edge jika kedua URL sudah dikunjungi
+    edges_visited = [
+        (source, target)
+        for source, target in edges
+        if source in visited and target in visited
+    ]
+    
+    G.add_edges_from(edges_visited)
+
 
     # Menampilkan informasi graph
     col1, col2 = st.columns(2)
