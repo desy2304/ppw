@@ -113,6 +113,14 @@ if "visited" in st.session_state and "edges" in st.session_state:
             len(edges)
         )
 
+    
+    # Mengambil hubungan antarhalaman yang sudah dikunjungi
+    edges_visited = [
+        (source, target)
+        for source, target in edges
+        if source in visited and target in visited
+    ]
+
     # Membuat DataFrame hasil crawling
     df_crawling = pd.DataFrame(
         sorted(edges_visited),
