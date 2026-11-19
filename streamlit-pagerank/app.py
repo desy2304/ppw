@@ -98,6 +98,14 @@ if "visited" in st.session_state and "edges" in st.session_state:
 
     st.subheader("Hasil Web Crawling")
 
+    
+    # Mengambil hubungan antarhalaman yang sudah dikunjungi
+    edges_visited = [
+        (source, target)
+        for source, target in edges
+        if source in visited and target in visited
+    ]
+
     # Menampilkan statistik crawling
     col1, col2 = st.columns(2)
 
@@ -110,9 +118,8 @@ if "visited" in st.session_state and "edges" in st.session_state:
     with col2:
         st.metric(
             "Jumlah Hubungan URL",
-            len(edges)
+            len(edges_visited)
         )
-
     
     # Mengambil hubungan antarhalaman yang sudah dikunjungi
     edges_visited = [
