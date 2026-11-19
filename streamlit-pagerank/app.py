@@ -161,16 +161,6 @@ if "visited" in st.session_state and "edges" in st.session_state:
     
     G.add_edges_from(edges_visited)
 
-
-    # Menampilkan informasi graph
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.metric("Jumlah Node", G.number_of_nodes())
-
-    with col2:
-        st.metric("Jumlah Edge", G.number_of_edges())
-
     # Membuat visualisasi interaktif
     net = Network(
         height="600px",
