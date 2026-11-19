@@ -9,6 +9,9 @@ import streamlit.components.v1 as components
 from pyvis.network import Network
 
 
+import matplotlib.pyplot as plt
+
+
 # Konfigurasi halaman
 st.set_page_config(
     page_title="Web Crawling dan PageRank",
@@ -179,3 +182,97 @@ if "visited" in st.session_state and "edges" in st.session_state:
         height=620,
         scrolling=True
     )
+    
+    
+    # ANALISIS PAGERANK
+    st.subheader("Analisis PageRank")
+
+    # Menghitung PageRank dari graph
+    if G.number_of_nodes() > 0:
+
+        pagerank = nx.pagerank(
+            G,
+            alpha=0.85,
+            max_iter=1000
+        )
+
+        # Mengurutkan PageRank dari tertinggi
+        ranking_pagerank = sorted(
+            pagerank.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+
+        # Membuat DataFrame PageRank
+        df_pagerank = pd.DataFrame(
+            ranking_pagerank,
+            columns=["URL", "PageRank"]
+        )
+
+        # Menambahkan kolom ranking
+        df_pagerank.insert(
+            0,
+            "Ranking",
+            range(1, len(df_pagerank) + 1)
+        )
+
+        # Menampilkan tabel hasil PageRank
+        st.subheader("Tabel Ranking PageRank")
+
+        st.dataframe(
+            df_pagerank,
+            use_container_width=True,
+            hide_index=True
+        )
+
+        # Menampilkan halaman dengan PageRank tertinggi
+        url_tertinggi = df_pagerank.iloc[0]["URL"]
+        skor_tertinggi = df_pagerank.iloc[0]["PageRank"]
+
+        st.success(
+            "Halaman dengan PageRank tertinggi:\n\n"
+            f"{url_tertinggi}\n\n"
+            f"Nilai PageRank: {skor_tertinggi:.6f}"
+        )
+
+        # VISUALISASI GRAFIK PAGERANK
+        st.subheader("Top 10 Halaman Berdasarkan PageRank")
+
+        # Mengambil 10 halaman teratas
+        top_10 = df_pagerank.head(10).copy()
+
+        # Membuat label lebih singkat
+        top_10["Label"] = top_10["URL"].apply(
+            lambda url: urlparse(url).path.strip("/") or "Homepage"
+        )
+
+        # Membuat grafik batang
+        fig, ax = plt.subplots(figsize=(12, 6))
+
+        ax.barh(
+            top_10["Label"],
+            top_10["PageRank"],
+            color="skyblue"
+        )
+
+        # Membalik urutan ranking
+        ax.invert_yaxis()
+
+        # Menambahkan judul
+        ax.set_title(
+            "Top 10 Halaman dengan PageRank Tertinggi"
+        )
+
+        ax.set_xlabel("Nilai PageRank")
+        ax.set_ylabel("Halaman Website")
+
+        plt.tight_layout()
+
+        # Menampilkan grafik di Streamlit
+        st.pyplot(fig)
+
+        plt.close(fig)
+
+    else:
+        st.warning("Belum ada data graph untuk dihitung.")
+
