@@ -85,11 +85,24 @@ if "visited" in st.session_state and "edges" in st.session_state:
             height="600px", width="100%", directed=True,
             bgcolor="#ffffff", font_color="black", cdn_resources="in_line"
         )
+        
         net.barnes_hut()
-        for i, node in enumerate(sorted(G.nodes()), start=1):
-            net.add_node(node, label=f"Node {i}", title=node, color="#87CEEB", size=15)
+        
+        # Menampilkan URL lengkap pada setiap node
+        for node in sorted(G.nodes()):
+            net.add_node(
+                node,
+                label=node,
+                title=node,
+                color="#87CEEB",
+                size=15,
+                font={"size": 12}
+            )
+        
+        # Menambahkan hubungan antarhalaman
         for source, target in G.edges():
             net.add_edge(source, target)
+
         components.html(net.generate_html(), height=620, scrolling=True)
 
         st.subheader("Analisis PageRank")
